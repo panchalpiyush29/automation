@@ -29,7 +29,7 @@ public class GoogleStepsTest {
     }
 
     @Test
-    public void iCanSeeTheCorrectResult() throws Exception {
+    public void iShouldSeeTheCorrectResult() throws Exception {
 
     }
 
