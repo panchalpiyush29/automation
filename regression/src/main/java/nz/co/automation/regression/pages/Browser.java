@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 public class Browser {
 
     public void open(String url) {
-        throw new RuntimeException();
+        
     }
 }

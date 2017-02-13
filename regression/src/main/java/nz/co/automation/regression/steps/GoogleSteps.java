@@ -32,12 +32,13 @@ public class GoogleSteps {
     public void iSearchOnGoogle() {
     }
 
-    @Then("^I can see the correct result$")
-    public void iCanSeeTheCorrectResult() {
-    }
-
     @Given("^I am on google page$")
     public void iAmOnGooglePage() {
         browser.open("http://www.google.co.nz");
+    }
+
+    @Then("^I should see the correct result$")
+    public void iShouldSeeTheCorrectResult() {
+
     }
 }
