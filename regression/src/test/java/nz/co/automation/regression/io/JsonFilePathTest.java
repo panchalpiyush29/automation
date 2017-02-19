@@ -3,6 +3,8 @@ package nz.co.automation.regression.io;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.management.Query;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class JsonFilePathTest {
@@ -16,9 +18,10 @@ public class JsonFilePathTest {
     @Test
     public void build() throws Exception {
         String type = "test";
+        Class<Query> classType = Query.class;
 
         // when
-        String path = jsonFilePath.build(type);
+        String path = jsonFilePath.build(type, classType);
 
         // then
         assertThat(path).isEqualTo("data/query/test.json");

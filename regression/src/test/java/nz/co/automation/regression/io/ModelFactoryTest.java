@@ -35,7 +35,7 @@ public class ModelFactoryTest {
         Query expected = mock(Query.class);
 
         // given
-        given(jsonFilePath.build(type)).willReturn(path);
+        given(jsonFilePath.build(type, classType)).willReturn(path);
         given(fileReader.read(path)).willReturn(inputStream);
         given(jsonReader.read(inputStream, classType)).willReturn(expected);
 

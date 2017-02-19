@@ -20,7 +20,7 @@ public class ModelFactory {
     }
 
     public <T> T create(String type, Class<T> classType) {
-        String path = jsonFilePath.build(type);
+        String path = jsonFilePath.build(type, classType);
         InputStream inputStream = fileReader.read(path);
         return jsonReader.read(inputStream, classType);
     }
