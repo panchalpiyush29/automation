@@ -19,7 +19,7 @@ public class JsonReaderTest {
 
     @Test
     public void read() throws Exception {
-        InputStream inputStream = new FileReader().read("data/query/test.json");
+        InputStream inputStream = getInputStream("data/query/test.json");
 
         // when
         Query query = jsonReader.read(inputStream, Query.class);
@@ -31,9 +31,13 @@ public class JsonReaderTest {
 
     @Test (expected = IllegalStateException.class)
     public void readCorruptJsonFile() throws Exception {
-        InputStream inputStream = new FileReader().read("data/query/corrupt.json");
+        InputStream inputStream = getInputStream("data/query/corrupt.json");
 
         // when
         jsonReader.read(inputStream, Query.class);
+    }
+
+    private InputStream getInputStream(String name) {
+        return Thread.currentThread().getContextClassLoader().getResourceAsStream(name);
     }
 }
