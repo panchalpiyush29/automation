@@ -13,17 +13,17 @@ import static shiver.me.timbers.data.random.RandomStrings.someString;
 
 public class ModelFactoryTest {
     private ModelFactory modelFactory;
-    private JsonFilePath jsonFilePath;
+    private FilePathBuilder filePathBuilder;
     private FileReader fileReader;
     private JsonReader jsonReader;
 
 
     @Before
     public void setUp() throws Exception {
-        jsonFilePath = mock(JsonFilePath.class);
+        filePathBuilder = mock(FilePathBuilder.class);
         fileReader = mock(FileReader.class);
         jsonReader = mock(JsonReader.class);
-        modelFactory = new ModelFactory(jsonFilePath, fileReader, jsonReader);
+        modelFactory = new ModelFactory(filePathBuilder, fileReader, jsonReader);
     }
 
     @Test
@@ -35,12 +35,12 @@ public class ModelFactoryTest {
         Query expected = mock(Query.class);
 
         // given
-        given(jsonFilePath.build(type, classType)).willReturn(path);
+        given(filePathBuilder.build(type, classType, "json")).willReturn(path);
         given(fileReader.read(path)).willReturn(inputStream);
         given(jsonReader.read(inputStream, classType)).willReturn(expected);
 
         // when
-        Query actual = modelFactory.create(type, classType);
+        Query actual = modelFactory.createFromJson(type, classType);
 
         // then
         assertThat(actual).isEqualTo(expected);

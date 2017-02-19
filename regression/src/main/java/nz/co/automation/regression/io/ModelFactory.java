@@ -8,19 +8,19 @@ import java.io.InputStream;
 @Component
 public class ModelFactory {
 
-    private final JsonFilePath jsonFilePath;
+    private final FilePathBuilder filePathBuilder;
     private final FileReader fileReader;
     private final JsonReader jsonReader;
 
     @Autowired
-    public ModelFactory(JsonFilePath jsonFilePath, FileReader fileReader, JsonReader jsonReader) {
-        this.jsonFilePath = jsonFilePath;
+    public ModelFactory(FilePathBuilder filePathBuilder, FileReader fileReader, JsonReader jsonReader) {
+        this.filePathBuilder = filePathBuilder;
         this.fileReader = fileReader;
         this.jsonReader = jsonReader;
     }
 
-    public <T> T create(String type, Class<T> classType) {
-        String path = jsonFilePath.build(type, classType);
+    public <T> T createFromJson(String type, Class<T> classType) {
+        String path = filePathBuilder.build(type, classType, "json");
         InputStream inputStream = fileReader.read(path);
         return jsonReader.read(inputStream, classType);
     }

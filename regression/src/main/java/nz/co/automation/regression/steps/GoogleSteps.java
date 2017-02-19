@@ -26,7 +26,7 @@ public class GoogleSteps extends BaseSteps {
     @Given("^I have a \"([^\"]*)\" search query$")
     public void iHaveASearchQuery(String queryType) {
 
-        Query query = modelFactory.create(queryType, Query.class);
+        Query query = modelFactory.createFromJson(queryType, Query.class);
         queryHolder.set(query);
     }
 

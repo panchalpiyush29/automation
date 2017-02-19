@@ -34,14 +34,14 @@ public class GoogleStepsTest {
         Query query = mock(Query.class);
 
         // given
-        given(modelFactory.create(queryType, Query.class)).willReturn(query);
+        given(modelFactory.createFromJson(queryType, Query.class)).willReturn(query);
         doNothing().when(queryHolder).set(query);
 
         // when
         googleSteps.iHaveASearchQuery(queryType);
 
         // then
-        then(modelFactory).should().create(queryType, Query.class);
+        then(modelFactory).should().createFromJson(queryType, Query.class);
         then(queryHolder).should().set(query);
     }
 

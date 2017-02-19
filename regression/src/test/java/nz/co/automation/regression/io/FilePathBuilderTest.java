@@ -7,12 +7,12 @@ import javax.management.Query;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class JsonFilePathTest {
-    private JsonFilePath jsonFilePath;
+public class FilePathBuilderTest {
+    private FilePathBuilder filePathBuilder;
 
     @Before
     public void setUp() throws Exception {
-        jsonFilePath = new JsonFilePath();
+        filePathBuilder = new FilePathBuilder();
     }
 
     @Test
@@ -21,7 +21,7 @@ public class JsonFilePathTest {
         Class<Query> classType = Query.class;
 
         // when
-        String path = jsonFilePath.build(type, classType);
+        String path = filePathBuilder.build(type, classType, "json");
 
         // then
         assertThat(path).isEqualTo("data/query/test.json");
