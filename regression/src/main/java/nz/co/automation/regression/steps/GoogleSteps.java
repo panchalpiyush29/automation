@@ -41,5 +41,5 @@ public class GoogleSteps extends BaseSteps {
     @Then("^I should see the correct result$")
     public void iShouldSeeTheCorrectResult() {
     }
-    
+
 }
