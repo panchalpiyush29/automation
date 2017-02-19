@@ -23,23 +23,23 @@ public class GoogleSteps extends BaseSteps {
         this.queryHolder = queryHolder;
     }
 
+    @Given("^I am on google page$")
+    public void iAmOnGooglePage() {
+        browser.open("http://www.google.co.nz");
+    }
+
     @Given("^I have a \"([^\"]*)\" search query$")
     public void iHaveASearchQuery(String queryType) {
         Query query = modelFactory.createFromJson(queryType, Query.class);
         queryHolder.set(query);
     }
 
-    @When("^I search on google$")
-    public void iSearchOnGoogle() {
-    }
-
-    @Given("^I am on google page$")
-    public void iAmOnGooglePage() {
-        browser.open("http://www.google.co.nz");
+    @When("^I perform a search on google landing page$")
+    public void iPerformASearchOnGoogleLandingPage() {
     }
 
     @Then("^I should see the correct result$")
     public void iShouldSeeTheCorrectResult() {
-
     }
+    
 }
