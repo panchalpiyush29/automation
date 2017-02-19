@@ -6,14 +6,15 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static java.lang.String.format;
+
 @Component
 public class JsonReader {
     public <T> T read(InputStream inputStream, Class<T> classType) {
         try {
             return new ObjectMapper().readValue(inputStream, classType);
         } catch (IOException e) {
-            // TODO Fix this message!
-            throw new IllegalStateException("Unable to read!");
+            throw new IllegalStateException(format("Unable to read input stream for class type %s", classType.getSimpleName()));
         }
     }
 }

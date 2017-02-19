@@ -29,4 +29,11 @@ public class JsonReaderTest {
         assertThat(query.getQuery()).isEqualTo("automation");
     }
 
+    @Test (expected = IllegalStateException.class)
+    public void readCorruptJsonFile() throws Exception {
+        InputStream inputStream = new FileReader().read("data/query/corrupt.json");
+
+        // when
+        Query query = jsonReader.read(inputStream, Query.class);
+    }
 }
