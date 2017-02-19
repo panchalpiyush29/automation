@@ -34,6 +34,6 @@ public class JsonReaderTest {
         InputStream inputStream = new FileReader().read("data/query/corrupt.json");
 
         // when
-        Query query = jsonReader.read(inputStream, Query.class);
+        jsonReader.read(inputStream, Query.class);
     }
 }
