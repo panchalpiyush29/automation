@@ -10,6 +10,8 @@ import nz.co.automation.regression.pages.Browser;
 import nz.co.automation.regression.pages.GoogleHomePage;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class GoogleSteps extends BaseSteps {
 
@@ -45,6 +47,7 @@ public class GoogleSteps extends BaseSteps {
 
     @Then("^I should see the correct result$")
     public void iShouldSeeTheCorrectResult() {
+        assertThat(googleHomePage.hasResults()).isTrue();
     }
 
 }
