@@ -14,6 +14,7 @@ import static org.mockito.Mockito.mock;
 import static shiver.me.timbers.data.random.RandomStrings.someString;
 
 public class GoogleStepsTest {
+
     private GoogleSteps googleSteps;
     private Browser browser;
     private ModelFactory modelFactory;
@@ -26,6 +27,18 @@ public class GoogleStepsTest {
         queryHolder = mock(QueryHolder.class);
         googleSteps = new GoogleSteps(browser, modelFactory, queryHolder);
 
+    }
+
+    @Test
+    public void iAmOnGooglePage() throws Exception {
+        // given
+        doNothing().when(browser).open("http://www.google.co.nz");
+
+        // when
+        googleSteps.iAmOnGooglePage();
+
+        // then
+        then(browser).should().open("http://www.google.co.nz");
     }
 
     @Test
@@ -46,25 +59,13 @@ public class GoogleStepsTest {
     }
 
     @Test
-    public void iSearchOnGoogle() throws Exception {
+    public void iPerformASearchOnGoogleLandingPage() throws Exception {
 
     }
 
     @Test
     public void iShouldSeeTheCorrectResult() throws Exception {
 
-    }
-
-    @Test
-    public void iAmOnGooglePage() throws Exception {
-        // given
-        doNothing().when(browser).open("http://www.google.co.nz");
-
-        // when
-        googleSteps.iAmOnGooglePage();
-
-        // then
-        then(browser).should().open("http://www.google.co.nz");
     }
 
 }
