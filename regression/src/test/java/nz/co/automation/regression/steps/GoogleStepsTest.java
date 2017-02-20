@@ -4,6 +4,7 @@ import nz.co.automation.regression.domain.Query;
 import nz.co.automation.regression.domain.QueryHolder;
 import nz.co.automation.regression.io.ModelFactory;
 import nz.co.automation.regression.pages.Browser;
+import nz.co.automation.regression.pages.GoogleHomePage;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,14 +20,15 @@ public class GoogleStepsTest {
     private Browser browser;
     private ModelFactory modelFactory;
     private QueryHolder queryHolder;
+    private GoogleHomePage googleHomePage;
 
     @Before
     public void setUp() throws Exception {
         browser = mock(Browser.class);
         modelFactory = mock(ModelFactory.class);
         queryHolder = mock(QueryHolder.class);
-        googleSteps = new GoogleSteps(browser, modelFactory, queryHolder);
-
+        googleHomePage = mock(GoogleHomePage.class);
+        googleSteps = new GoogleSteps(browser, modelFactory, queryHolder, googleHomePage);
     }
 
     @Test
@@ -60,7 +62,18 @@ public class GoogleStepsTest {
 
     @Test
     public void iPerformASearchOnGoogleLandingPage() throws Exception {
+        Query query = mock(Query.class);
 
+        // given
+        given(queryHolder.get()).willReturn(query);
+        doNothing().when(googleHomePage).search(query);
+
+        // when
+        googleSteps.iPerformASearchOnGoogleLandingPage();
+
+        // then
+        then(queryHolder).should().get();
+        then(googleHomePage).should().search(query);
     }
 
     @Test
