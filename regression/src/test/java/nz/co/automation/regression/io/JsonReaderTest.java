@@ -49,6 +49,14 @@ public class JsonReaderTest {
         assertThat(queries).hasSize(2);
     }
 
+    @Test (expected = IllegalStateException.class)
+    public void readCorruptList() throws Exception {
+        InputStream inputStream = getInputStream("data/query/corrupt.json");
+
+        // when
+        jsonReader.readList(inputStream, Query.class);
+    }
+
     @Test
     public void readSet() {
         InputStream inputStream = getInputStream("data/query/tests.json");
@@ -58,6 +66,14 @@ public class JsonReaderTest {
 
         // then
         assertThat(queries).hasSize(1);
+    }
+
+    @Test (expected = IllegalStateException.class)
+    public void readCorruptSet() throws Exception {
+        InputStream inputStream = getInputStream("data/query/corrupt.json");
+
+        // when
+        jsonReader.readSet(inputStream, Query.class);
     }
 
     private InputStream getInputStream(String name) {

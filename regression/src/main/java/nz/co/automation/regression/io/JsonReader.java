@@ -20,7 +20,7 @@ public class JsonReader {
         try {
             return objectMapper.readValue(inputStream, classType);
         } catch (IOException e) {
-            throw new IllegalStateException(format("Unable to read input stream for class type %s", classType.getSimpleName()));
+            throw new IllegalStateException(format("Unable to read input stream for class type %s", classType.getSimpleName()), e);
         }
     }
 
@@ -29,7 +29,7 @@ public class JsonReader {
         try {
             return objectMapper.readValue(inputStream, javaType);
         } catch (IOException e) {
-            throw new IllegalStateException(format("Unable to read input stream for class type %s", classType.getSimpleName()));
+            throw new IllegalStateException(format("Unable to read input stream for class type %s", classType.getSimpleName()), e);
         }
     }
 
@@ -38,7 +38,7 @@ public class JsonReader {
         try {
             return objectMapper.readValue(inputStream, javaType);
         } catch (IOException e) {
-            throw new IllegalStateException(format("Unable to read input stream for class type %s", classType.getSimpleName()));
+            throw new IllegalStateException(format("Unable to read input stream for class type %s", classType.getSimpleName()), e);
         }
     }
 }
