@@ -6,6 +6,7 @@ import nz.co.automation.regression.io.ModelFactory;
 import nz.co.automation.regression.pages.Browser;
 import nz.co.automation.regression.pages.GoogleHomePage;
 import org.junit.Before;
+import org.junit.ComparisonFailure;
 import org.junit.Test;
 
 import static org.mockito.BDDMockito.given;
@@ -78,7 +79,27 @@ public class GoogleStepsTest {
 
     @Test
     public void iShouldSeeTheCorrectResult() throws Exception {
+        // given
+        given(googleHomePage.hasResults()).willReturn(true);
 
+        // when
+        googleSteps.iShouldSeeTheCorrectResult();
+
+        // then
+        then(googleHomePage).should().hasResults();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void iShouldSeeTheCorrectResultThrowsException() {
+
+        // given
+        given(googleHomePage.hasResults()).willReturn(false);
+
+        // when
+        googleSteps.iShouldSeeTheCorrectResult();
+
+        // then
+        then(googleHomePage).should().hasResults();
     }
 
 }
