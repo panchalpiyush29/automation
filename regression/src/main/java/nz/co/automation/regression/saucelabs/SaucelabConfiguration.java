@@ -1,6 +1,5 @@
-package nz.co.automation.regression;
+package nz.co.automation.regression.saucelabs;
 
-import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,10 +46,7 @@ public class SaucelabConfiguration {
 
         // saucelabs
         final String saucelabsUrl = format("https://%s:%s@%s/wd/hub", saucelabsUserName, saucelabsPassword, saucelabsDomain);
-
-        final RemoteWebDriver remoteWebDriver = new RemoteWebDriver(new URL(saucelabsUrl), capabilities);
-        WebDriverRunner.setWebDriver(remoteWebDriver);
-        return remoteWebDriver;
+        return new RemoteWebDriver(new URL(saucelabsUrl), capabilities);
     }
 
 }
