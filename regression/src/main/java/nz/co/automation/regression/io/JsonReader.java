@@ -2,6 +2,7 @@ package nz.co.automation.regression.io;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.deser.RandomGeneratorModule;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -14,7 +15,13 @@ import static java.lang.String.format;
 @Component
 public class JsonReader {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
+
+    public JsonReader() {
+        objectMapper = new ObjectMapper();
+        RandomGeneratorModule module = new RandomGeneratorModule();
+        objectMapper.registerModule(module);
+    }
 
     public <T> T read(InputStream inputStream, Class<T> classType) {
         try {

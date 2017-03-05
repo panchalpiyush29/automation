@@ -30,4 +30,11 @@ public class Query {
         return query != null ? query.hashCode() : 0;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Query{");
+        sb.append("query='").append(query).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
