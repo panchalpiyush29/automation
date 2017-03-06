@@ -10,6 +10,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
+import static com.codeborne.selenide.Selenide.close;
 import static org.openqa.selenium.OutputType.BYTES;
 
 public class Hooks extends BaseSteps {
@@ -46,7 +47,7 @@ public class Hooks extends BaseSteps {
             }
         } finally {
             if (isSaucelabsEnabled()) {
-                saucelabsDriver.close();
+                close();
             }
         }
     }
