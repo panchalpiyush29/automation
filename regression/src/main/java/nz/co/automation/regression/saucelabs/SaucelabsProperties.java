@@ -12,6 +12,7 @@ public class SaucelabsProperties {
     private String automationTunnel;
     private String automationResolution;
     private String automationPlatform;
+    private String restDomain;
 
     public String getDomain() {
         return domain;
@@ -59,5 +60,13 @@ public class SaucelabsProperties {
 
     public void setAutomationPlatform(String automationPlatform) {
         this.automationPlatform = automationPlatform;
+    }
+
+    public String getRestDomain() {
+        return restDomain;
+    }
+
+    public void setRestDomain(String restDomain) {
+        this.restDomain = restDomain;
     }
 }

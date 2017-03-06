@@ -26,6 +26,10 @@ public class SaucelabsClient {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * We are using saucelabs api to update the job name with the scenario name. Refer to https://wiki.saucelabs.com/display/DOCS/Job+Methods#JobMethods-UpdateJob.
+     * @param scenario
+     */
     public void updateCurrentJob(Scenario scenario) {
         final HttpHeaders headers = buildRequestHeaders();
         final HashMap<String, Object> body = buildRequestBody(scenario);
@@ -63,6 +67,6 @@ public class SaucelabsClient {
     }
 
     private String buildRequestUrl(RemoteWebDriver remoteWebDriver) {
-        return format("https://%s/rest/v1/%s/jobs/%s", saucelabsProperties.getDomain(), saucelabsProperties.getUsername(), remoteWebDriver.getSessionId());
+        return format("https://%s/rest/v1/%s/jobs/%s", saucelabsProperties.getRestDomain(), saucelabsProperties.getUsername(), remoteWebDriver.getSessionId());
     }
 }
