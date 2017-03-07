@@ -5,6 +5,7 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import nz.co.automation.regression.saucelabs.SaucelabsClient;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +28,14 @@ public class Hooks extends BaseSteps {
     }
 
     @Before
-    public void setUp() {
+    public void beforeScenario() {
         if (isSaucelabsEnabled()) {
             WebDriverRunner.setWebDriver(saucelabsDriver);
         }
     }
 
     @After
-    public void tearDown(Scenario scenario) {
+    public void afterScenario (Scenario scenario) {
         try {
             if (isSaucelabsEnabled()) {
                 saucelabsClient.updateCurrentJob(scenario);
@@ -53,6 +54,7 @@ public class Hooks extends BaseSteps {
     }
 
     private boolean isSaucelabsEnabled() {
-        return environment.getProperty("saucelabs.enabled").equals("true");
+        final String property = environment.getProperty("saucelabs.enabled");
+        return StringUtils.isNotBlank(property) && property.equals("true");
     }
 }

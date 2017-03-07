@@ -13,6 +13,8 @@ public class SaucelabsProperties {
     private String automationResolution;
     private String automationPlatform;
     private String restDomain;
+    private String browserName;
+    private String browserVersion;
 
     public String getDomain() {
         return domain;
@@ -68,5 +70,21 @@ public class SaucelabsProperties {
 
     public void setRestDomain(String restDomain) {
         this.restDomain = restDomain;
+    }
+
+    public String getBrowserName() {
+        return browserName;
+    }
+
+    public void setBrowserName(String browserName) {
+        this.browserName = browserName;
+    }
+
+    public String getBrowserVersion() {
+        return browserVersion;
+    }
+
+    public void setBrowserVersion(String browserVersion) {
+        this.browserVersion = browserVersion;
     }
 }

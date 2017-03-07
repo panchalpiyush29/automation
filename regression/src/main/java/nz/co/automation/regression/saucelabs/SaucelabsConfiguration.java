@@ -1,5 +1,6 @@
 package nz.co.automation.regression.saucelabs;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,12 @@ public class SaucelabsConfiguration {
         capabilities.setCapability("screenResolution", saucelabsProperties.getAutomationResolution());
         capabilities.setCapability("tunnel-identifier", saucelabsProperties.getAutomationTunnel());
         capabilities.setCapability("platform", saucelabsProperties.getAutomationPlatform());
+
+        if (StringUtils.isNotBlank(saucelabsProperties.getBrowserName()) &&
+                StringUtils.isNotBlank(saucelabsProperties.getBrowserVersion())) {
+            capabilities.setCapability("browserName", saucelabsProperties.getBrowserName());
+            capabilities.setCapability("version", saucelabsProperties.getBrowserVersion());
+        }
 
         // saucelabs
         final String saucelabsUrl = format("https://%s:%s@%s/wd/hub", saucelabsProperties.getUsername(), saucelabsProperties.getPassword(), saucelabsProperties.getDomain());

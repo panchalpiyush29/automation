@@ -3,6 +3,7 @@ package nz.co.automation.regression.saucelabs;
 import com.codeborne.selenide.WebDriverRunner;
 import cucumber.api.Scenario;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.SessionId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -36,7 +37,7 @@ public class SaucelabsClient {
         final HttpEntity entity = buildRequestEntity(headers, body);
 
         final RemoteWebDriver remoteWebDriver = getWebDriver();
-        final String url = buildRequestUrl(remoteWebDriver);
+        final String url = buildRequestUrl(remoteWebDriver.getSessionId());
 
         restTemplate.put(url, entity);
     }
@@ -66,7 +67,7 @@ public class SaucelabsClient {
         return (RemoteWebDriver) WebDriverRunner.getWebDriver();
     }
 
-    private String buildRequestUrl(RemoteWebDriver remoteWebDriver) {
-        return format("https://%s/rest/v1/%s/jobs/%s", saucelabsProperties.getRestDomain(), saucelabsProperties.getUsername(), remoteWebDriver.getSessionId());
+    private String buildRequestUrl(SessionId sessionId) {
+        return format("https://%s/rest/v1/%s/jobs/%s", saucelabsProperties.getRestDomain(), saucelabsProperties.getUsername(), sessionId);
     }
 }
