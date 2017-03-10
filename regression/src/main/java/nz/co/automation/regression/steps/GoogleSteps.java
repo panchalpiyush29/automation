@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class GoogleSteps extends BaseSteps {
+public class GoogleSteps {
 
     private final Browser browser;
     private ModelFactory modelFactory;
