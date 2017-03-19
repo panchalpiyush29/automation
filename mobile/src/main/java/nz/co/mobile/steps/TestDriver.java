@@ -1,5 +1,6 @@
 package nz.co.mobile.steps;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import nz.co.mobile.domain.RunConfiguration;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -10,7 +11,7 @@ import java.net.URL;
 public class TestDriver {
 
     private static TestDriver instance;
-    private AndroidDriver driver;
+    private AppiumDriver driver;
     private RunConfiguration config;
 
     private TestDriver() {
@@ -23,6 +24,10 @@ public class TestDriver {
         return instance;
     }
 
+    public AppiumDriver getDriver() {
+        return driver;
+    }
+
     public void setUp() throws MalformedURLException {
         config = new RunConfiguration();
         //Please modify deviceName(same as one in Android Studio), Path before running the test
@@ -30,6 +35,8 @@ public class TestDriver {
         desiredCapabilities.setCapability("deviceName", config.getAndroidEmulatorName());
         desiredCapabilities.setCapability("platform", "Android");
         desiredCapabilities.setCapability("app", config.getAppPath() + "app-debug.apk");
+        desiredCapabilities.setCapability("appPackage", "nz.co.spark.hellospark");
+        desiredCapabilities.setCapability("appActivity", ".MainActivity");
         driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
     }
 
