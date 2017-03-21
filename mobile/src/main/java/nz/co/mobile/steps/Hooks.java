@@ -2,18 +2,24 @@ package nz.co.mobile.steps;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import io.appium.java_client.AppiumDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.net.MalformedURLException;
+public class Hooks extends BaseSteps {
 
-public class Hooks {
+    private final AppiumDriver appiumDriver;
+
+    @Autowired
+    public Hooks(AppiumDriver appiumDriver) {
+        this.appiumDriver = appiumDriver;
+    }
 
     @Before
-    public void setUp() throws MalformedURLException {
-        TestDriver.getInstance().setUp();
+    public void setUp() {
     }
 
     @After
     public void tearDown() {
-        TestDriver.getInstance().finish();
+        appiumDriver.quit();
     }
 }

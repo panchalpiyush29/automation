@@ -9,10 +9,10 @@ import nz.co.mobile.holder.UserDetailsHolder;
 import nz.co.mobile.screen.LoginScreen;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class LoginSteps extends BaseSteps {
-    private UserDetailsHolder userDetailsHolder;
-    private LoginScreen loginScreen;
-    private ModelFactory modelFactory;
+public class LoginSteps {
+    private final UserDetailsHolder userDetailsHolder;
+    private final LoginScreen loginScreen;
+    private final ModelFactory modelFactory;
 
     @Autowired
     public LoginSteps(UserDetailsHolder userDetailsHolder, LoginScreen loginScreen, ModelFactory modelFactory) {
