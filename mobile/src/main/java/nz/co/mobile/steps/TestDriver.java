@@ -4,16 +4,18 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import nz.co.mobile.domain.RunConfiguration;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-
+@Component
 public class TestDriver {
 
     private static TestDriver instance;
     private AppiumDriver driver;
     private RunConfiguration config;
-
+    @Autowired
     private TestDriver() {
     }
 
@@ -24,7 +26,7 @@ public class TestDriver {
         return instance;
     }
 
-    public AppiumDriver getDriver() {
+    public AppiumDriver getAppiumDriver() {
         return driver;
     }
 
