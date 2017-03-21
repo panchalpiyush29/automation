@@ -9,18 +9,21 @@ import org.springframework.stereotype.Component;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
 @Component
 public class TestDriver {
 
     private static TestDriver instance;
     private AppiumDriver driver;
     private RunConfiguration config;
+
     @Autowired
     private TestDriver() {
     }
 
-    public static TestDriver getInstance(){
-        if (instance == null){
+    public static TestDriver getInstance() {
+        if (instance == null) {
             instance = new TestDriver();
         }
         return instance;
@@ -40,9 +43,10 @@ public class TestDriver {
         desiredCapabilities.setCapability("appPackage", "nz.co.spark.hellospark");
         desiredCapabilities.setCapability("appActivity", ".MainActivity");
         driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
+        driver.manage().timeouts().implicitlyWait(30L, TimeUnit.SECONDS);
     }
 
-    public void finish(){
+    public void finish() {
         driver.quit();
     }
 }

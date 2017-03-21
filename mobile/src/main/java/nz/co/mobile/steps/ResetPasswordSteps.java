@@ -4,18 +4,13 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import nz.co.mobile.screen.LoginScreen;
 import nz.co.mobile.screen.ResetPasswordScreen;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import static junit.framework.TestCase.assertTrue;
 
-public class ResetPasswordSteps extends BaseSteps {
-    private ResetPasswordScreen resetPasswordScreen;
-    private LoginScreen loginScreen;
+public class ResetPasswordSteps {
 
-    @Autowired
-    public ResetPasswordSteps(ResetPasswordScreen resetPasswordScreen, LoginScreen loginScreen) {
-        this.resetPasswordScreen = resetPasswordScreen;
-        this.loginScreen = loginScreen;
-    }
+    ResetPasswordScreen resetPasswordScreen = new ResetPasswordScreen();
+    LoginScreen loginScreen = new LoginScreen();
 
 
     @When("^I reset my password$")
@@ -27,6 +22,7 @@ public class ResetPasswordSteps extends BaseSteps {
 
     @Then("^I can see the success message$")
     public void iCanSeeTheSuccessMessage() {
+        assertTrue(resetPasswordScreen.verifySuccessMessage());
+        assertTrue(resetPasswordScreen.returnToLoginScreenButtonIsDisplayed());
     }
 }
-
