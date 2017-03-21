@@ -1,5 +1,6 @@
 package nz.co.mobile.steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -8,6 +9,8 @@ import nz.co.mobile.domain.UserDetails;
 import nz.co.mobile.holder.UserDetailsHolder;
 import nz.co.mobile.screen.LoginScreen;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoginSteps extends BaseSteps {
     private UserDetailsHolder userDetailsHolder;
@@ -37,6 +40,13 @@ public class LoginSteps extends BaseSteps {
 
     @Then("^I can see the welcome page after skipping the welcome video$")
     public void iCanSeeTheWelcomePageAfterSkippingTheWelcomeVideo() {
-        loginScreen.skipWelcomeVideo();
+        loginScreen.dismissNotification();
+        assertThat(loginScreen.isDisplayingTheWelcomeToSparkMessage()).isTrue();
+    }
+
+    @Given("^I navigate to the set up access card section$")
+    public void iNavigateToTheSetUpAccessCardSection() {
+        loginScreen.clickOnToDoSection();
+        loginScreen.clickOnSetUpAccessCard();
     }
 }

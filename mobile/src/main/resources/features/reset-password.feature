@@ -1,5 +1,5 @@
-@regression
-Feature: Rest my password
+@regression @resetPassword
+Feature: Reset my password
 
   Scenario: I can reset my password successfully
     Given I am a "valid" user

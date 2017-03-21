@@ -1,4 +1,4 @@
-@login @wip
+@regression @login
 Feature: Login with a valid user
 
   Scenario: I can login successfully
