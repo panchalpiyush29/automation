@@ -46,7 +46,6 @@ public class LoginSteps extends BaseSteps {
 
     @Given("^I navigate to the set up access card section$")
     public void iNavigateToTheSetUpAccessCardSection() {
-        loginScreen.clickOnToDoSection();
-        loginScreen.clickOnSetUpAccessCard();
+
     }
 }
