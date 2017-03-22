@@ -2,6 +2,8 @@ package nz.co.mobile.steps;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import nz.co.mobile.domain.UserDetails;
+import nz.co.mobile.holder.UserDetailsHolder;
 import nz.co.mobile.screen.LoginScreen;
 import nz.co.mobile.screen.ResetPasswordScreen;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +13,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ResetPasswordSteps {
     private final ResetPasswordScreen resetPasswordScreen;
     private final LoginScreen loginScreen;
+    private final UserDetailsHolder userDetailsHolder;
 
     @Autowired
-    public ResetPasswordSteps(ResetPasswordScreen resetPasswordScreen, LoginScreen loginScreen) {
+    public ResetPasswordSteps(ResetPasswordScreen resetPasswordScreen, LoginScreen loginScreen, UserDetailsHolder userDetailsHolder) {
         this.resetPasswordScreen = resetPasswordScreen;
         this.loginScreen = loginScreen;
+        this.userDetailsHolder = userDetailsHolder;
     }
 
     @When("^I reset my password$")
     public void iResetMyPassword() {
+        UserDetails userDetails = userDetailsHolder.get();
         loginScreen.clickForgotPasswordLink();
-        resetPasswordScreen.setEmailAddress("test@test.com");
+        resetPasswordScreen.setEmailAddress(userDetails.getEmail());
         resetPasswordScreen.clickSubmitButton();
     }
 
