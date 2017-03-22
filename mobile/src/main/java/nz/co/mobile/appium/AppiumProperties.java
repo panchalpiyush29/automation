@@ -11,6 +11,9 @@ public class AppiumProperties {
     private String androidEmulatorName;
     private String packagePath;
     private String activityClass;
+    private String platForm;
+    private String host;
+    private String port;
 
     public String getPath() {
         return path;
@@ -42,5 +45,29 @@ public class AppiumProperties {
 
     public void setActivityClass(String activityClass) {
         this.activityClass = activityClass;
+    }
+
+    public String getPlatForm() {
+        return platForm;
+    }
+
+    public void setPlatForm(String platForm) {
+        this.platForm = platForm;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
     }
 }
