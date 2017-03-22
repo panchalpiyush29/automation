@@ -18,27 +18,23 @@ import static org.springframework.context.annotation.ScopedProxyMode.TARGET_CLAS
 @Configuration
 public class AppiumConfiguration {
 
-    @Autowired
-    AppiumProperties appiumProperties;
-
     @Bean(destroyMethod = "quit")
     @Scope(scopeName = "cucumber-glue", proxyMode = TARGET_CLASS)
     public AppiumDriver appiumDriver() throws MalformedURLException {
 
         // appium capabilities
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability("deviceName", appiumProperties.getAndroidEmulatorName());
-        desiredCapabilities.setCapability("platform", appiumProperties.getPlatForm());
-        desiredCapabilities.setCapability("app", appiumProperties.getPath());
-        desiredCapabilities.setCapability("appPackage", appiumProperties.getPackagePath());
-        desiredCapabilities.setCapability("appActivity", format(".%s", appiumProperties.getActivityClass()));
+        desiredCapabilities.setCapability("deviceName", "Nexus_5_API_22");
+        desiredCapabilities.setCapability("platform", "Android");
+        desiredCapabilities.setCapability("app", "nz.co.spark.hellospark");
+        desiredCapabilities.setCapability("appPackage", "nz.co.spark.hellospark");
+        desiredCapabilities.setCapability("appActivity", ".MainActivity");
 
         // appium
-        final URL appiumUrl = new URL(format("http://%s:%s/wd/hub", appiumProperties.getHost(), appiumProperties.getPort()));
-        AppiumDriver driver = new AndroidDriver(appiumUrl, desiredCapabilities);
+        AppiumDriver driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
 
         // configure appium
-        driver.manage().timeouts().implicitlyWait(30L, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(60L, TimeUnit.SECONDS);
 
         return driver;
     }
