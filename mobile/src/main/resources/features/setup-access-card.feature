@@ -1,4 +1,4 @@
-@regression @accessCard
+@accessCard
 Feature: Setting up my new access card
 
   Background: I am logged in
