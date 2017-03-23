@@ -26,15 +26,15 @@ public class AppiumConfiguration {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("deviceName", "Nexus_5_API_22");
         desiredCapabilities.setCapability("platform", "Android");
-        desiredCapabilities.setCapability("app", "nz.co.spark.hellospark");
-        desiredCapabilities.setCapability("appPackage", "nz.co.spark.hellospark");
+        desiredCapabilities.setCapability("app", "com.facebook.lite");
+        desiredCapabilities.setCapability("appPackage", "com.facebook.lite");
         desiredCapabilities.setCapability("appActivity", ".MainActivity");
 
         // appium
         AppiumDriver driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
 
         // configure appium
-        driver.manage().timeouts().implicitlyWait(60L, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5L, TimeUnit.MINUTES);
 
         return driver;
     }
