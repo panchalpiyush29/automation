@@ -3,7 +3,6 @@ package nz.co.mobile.appium;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -12,7 +11,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import static java.lang.String.format;
 import static org.springframework.context.annotation.ScopedProxyMode.TARGET_CLASS;
 
 @Configuration
