@@ -36,7 +36,6 @@ public class DogRestController {
         final String name = createDogRequest.getName();
         final Integer age = createDogRequest.getAge();
         final Dog dog = dogRestService.createDog(name, age);
-
         return new CreateDogResponse(RestStatus.SUCCESS, dog.getId());
     }
 
