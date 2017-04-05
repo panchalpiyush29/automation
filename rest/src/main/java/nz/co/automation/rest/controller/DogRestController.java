@@ -1,5 +1,6 @@
 package nz.co.automation.rest.controller;
 
+import io.swagger.annotations.ApiOperation;
 import nz.co.automation.rest.domain.*;
 import nz.co.automation.rest.service.DogRestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class DogRestController {
     }
 
     @RequestMapping(path = "/api/v1/dogs", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "dog", notes = "Returns a list of dogs")
     public List<Dog> getDogs() {
         return dogRestService.getDogs();
     }
@@ -40,11 +42,15 @@ public class DogRestController {
 
     @RequestMapping(path = "/api/v1/dogs/{id}", method = RequestMethod.PUT, produces = APPLICATION_JSON_VALUE)
     public UpdateDogResponse updateDog(@PathVariable("id") String id, @RequestBody UpdateDogRequest updateDogRequest) {
-        return null;
+        final String name = updateDogRequest.getName();
+        final Integer age = updateDogRequest.getAge();
+        dogRestService.updateDogById(id, name, age);
+        return new UpdateDogResponse(RestStatus.SUCCESS, id);
     }
 
     @RequestMapping(path = "/api/v1/dogs/{id}", method = RequestMethod.DELETE, produces = APPLICATION_JSON_VALUE)
     public DeleteDogResponse delete(@PathVariable("id") String id) {
-        return null;
+        dogRestService.deleteDog(id);
+        return new DeleteDogResponse(RestStatus.SUCCESS, id);
     }
 }
