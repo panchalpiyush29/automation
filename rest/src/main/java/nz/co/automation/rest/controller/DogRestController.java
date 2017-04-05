@@ -1,6 +1,5 @@
 package nz.co.automation.rest.controller;
 
-import io.swagger.annotations.ApiOperation;
 import nz.co.automation.rest.domain.*;
 import nz.co.automation.rest.service.DogRestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ public class DogRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "dog", notes = "Returns a list of dogs")
     public List<Dog> getDogs() {
         return dogRestService.getDogs();
     }
