@@ -11,6 +11,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
+@RequestMapping("/api/v1/dogs")
 public class DogRestController {
 
     private DogRestService dogRestService;
@@ -20,18 +21,18 @@ public class DogRestController {
         this.dogRestService = dogRestService;
     }
 
-    @RequestMapping(path = "/api/v1/dogs", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "dog", notes = "Returns a list of dogs")
     public List<Dog> getDogs() {
         return dogRestService.getDogs();
     }
 
-    @RequestMapping(path = "/api/v1/dogs/{id}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(path = "{id}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     public Dog getDog(@PathVariable("id") String id) {
         return dogRestService.getDog(id);
     }
 
-    @RequestMapping(path = "/api/v1/dogs", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
     public CreateDogResponse createDog(@RequestBody CreateDogRequest createDogRequest) {
         final String name = createDogRequest.getName();
         final Integer age = createDogRequest.getAge();
@@ -39,7 +40,7 @@ public class DogRestController {
         return new CreateDogResponse(RestStatus.SUCCESS, dog.getId());
     }
 
-    @RequestMapping(path = "/api/v1/dogs/{id}", method = RequestMethod.PUT, produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(path = "{id}", method = RequestMethod.PUT, produces = APPLICATION_JSON_VALUE)
     public UpdateDogResponse updateDog(@PathVariable("id") String id, @RequestBody UpdateDogRequest updateDogRequest) {
         final String name = updateDogRequest.getName();
         final Integer age = updateDogRequest.getAge();
@@ -47,7 +48,7 @@ public class DogRestController {
         return new UpdateDogResponse(RestStatus.SUCCESS, id);
     }
 
-    @RequestMapping(path = "/api/v1/dogs/{id}", method = RequestMethod.DELETE, produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(path = "{id}", method = RequestMethod.DELETE, produces = APPLICATION_JSON_VALUE)
     public DeleteDogResponse delete(@PathVariable("id") String id) {
         dogRestService.deleteDog(id);
         return new DeleteDogResponse(RestStatus.SUCCESS, id);
