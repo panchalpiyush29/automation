@@ -1,10 +1,16 @@
 package nz.co.automation.rest.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class CreateDogResponse {
     private final RestStatus success;
     private final String id;
 
-    public CreateDogResponse(RestStatus success, String id) {
+    @JsonCreator
+    public CreateDogResponse(
+            @JsonProperty("success") RestStatus success,
+            @JsonProperty("id") String id) {
         this.success = success;
         this.id = id;
     }
