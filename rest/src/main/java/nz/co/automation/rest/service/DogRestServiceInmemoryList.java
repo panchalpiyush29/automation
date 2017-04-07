@@ -1,18 +1,19 @@
 package nz.co.automation.rest.service;
 
 import nz.co.automation.rest.domain.Dog;
+import nz.co.automation.rest.exception.DogAlreadyExistException;
 import nz.co.automation.rest.exception.DogNotFoundException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
 public class DogRestServiceInmemoryList implements DogRestService {
 
-    private List<Dog> dogs = new ArrayList<Dog>();
+    private Set<Dog> dogs = new HashSet<Dog>();
 
     public DogRestServiceInmemoryList() {
         Dog dog1 = new Dog(UUID.randomUUID().toString(), "St Bernard", 1);
@@ -22,7 +23,7 @@ public class DogRestServiceInmemoryList implements DogRestService {
     }
 
     @Override
-    public List<Dog> getDogs() {
+    public Set<Dog> getDogs() {
         return dogs;
     }
 
@@ -40,7 +41,9 @@ public class DogRestServiceInmemoryList implements DogRestService {
     @Override
     public Dog createDog(String name, Integer age) {
         Dog dog = new Dog(UUID.randomUUID().toString(), name, age);
-        dogs.add(dog);
+        if (!dogs.add(dog)) {
+             throw new DogAlreadyExistException(dog);
+        }
         return dog;
     }
 

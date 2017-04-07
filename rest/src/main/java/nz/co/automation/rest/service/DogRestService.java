@@ -2,11 +2,11 @@ package nz.co.automation.rest.service;
 
 import nz.co.automation.rest.domain.Dog;
 
-import java.util.List;
+import java.util.Set;
 
 public interface DogRestService {
 
-    List<Dog> getDogs();
+    Set<Dog> getDogs();
 
     Dog getDog(String id);
 

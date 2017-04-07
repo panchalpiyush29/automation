@@ -5,7 +5,7 @@ import nz.co.automation.rest.service.DogRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -21,7 +21,7 @@ public class DogRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-    public List<Dog> getDogs() {
+    public Set<Dog> getDogs() {
         return dogRestService.getDogs();
     }
 
