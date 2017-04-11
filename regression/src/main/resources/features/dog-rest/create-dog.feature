@@ -1,4 +1,4 @@
-@regression
+@regression @rest
 Feature: Create a new dog
 
   Scenario: Create dog endpoint creates a new dog
