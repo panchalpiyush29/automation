@@ -7,6 +7,8 @@ import nz.co.automation.regression.domain.*;
 import nz.co.automation.regression.io.ModelFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -54,6 +56,9 @@ public class CreateDogSteps {
 
         // TODO: Call GET to verify that the new record is created
 
-        restTemplate.delete("http://localhost:8089/api/v1/dogs/" + createDogResponse.getId());
+        // delete the newly created dog record
+        final ResponseEntity<DeleteDogResponse> dogResponseResponseEntity = restTemplate.exchange("http://localhost:8089/api/v1/dogs/" + createDogResponse.getId(), HttpMethod.DELETE, null, DeleteDogResponse.class);
+        final DeleteDogResponse deleteDogResponse = dogResponseResponseEntity.getBody();
+        assertThat(deleteDogResponse.getSuccess()).isEqualTo(RestStatus.SUCCESS);
     }
 }
