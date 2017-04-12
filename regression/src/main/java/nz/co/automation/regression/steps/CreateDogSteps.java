@@ -8,6 +8,7 @@ import nz.co.automation.regression.io.ModelFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -62,5 +63,23 @@ public class CreateDogSteps {
         final ResponseEntity<DeleteDogResponse> dogResponseResponseEntity = restTemplate.exchange("http://localhost:8089/api/v1/dogs/" + createDogResponse.getId(), HttpMethod.DELETE, null, DeleteDogResponse.class);
         final DeleteDogResponse deleteDogResponse = dogResponseResponseEntity.getBody();
         assertThat(deleteDogResponse.getSuccess()).isEqualTo(RestStatus.SUCCESS);
+    }
+
+    @When("^I call create dog endpoint with the same dog details$")
+    public void iCallCreateDogEndpointWithTheSameDogDetails() {
+        final DogDetails dogDetails = dogDetailsHolder.get();
+
+        final HashMap<String, Object> body = new HashMap();
+        body.put("name", dogDetails.getName());
+        body.put("age", dogDetails.getAge());
+        HttpEntity request = new HttpEntity(body);
+
+        /*ResponseEntity<Object> responseEntity = restTemplate.postForEntity("http://localhost:8089/api/v1/dogs", request, Object.class);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);*/
+    }
+
+    @Then("^I should see an error response$")
+    public void iShouldSeeAnErrorResponse() {
+
     }
 }
