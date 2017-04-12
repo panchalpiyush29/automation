@@ -54,7 +54,9 @@ public class CreateDogSteps {
         CreateDogResponse createDogResponse = createDogResponseHolder.get();
         assertThat(createDogResponse.getSuccess()).isEqualTo(RestStatus.SUCCESS);
 
-        // TODO: Call GET to verify that the new record is created
+        // get to verify that the new record is created
+        Dog dog = restTemplate.getForObject("http://localhost:8089/api/v1/dogs/" + createDogResponse.getId(), Dog.class);
+        assertThat(dog.getId()).isEqualTo(createDogResponse.getId());
 
         // delete the newly created dog record
         final ResponseEntity<DeleteDogResponse> dogResponseResponseEntity = restTemplate.exchange("http://localhost:8089/api/v1/dogs/" + createDogResponse.getId(), HttpMethod.DELETE, null, DeleteDogResponse.class);
