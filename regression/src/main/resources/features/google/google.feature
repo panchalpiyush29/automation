@@ -1,4 +1,4 @@
-@regression
+@regression @google
 Feature: Do a google search
 
   Background:
