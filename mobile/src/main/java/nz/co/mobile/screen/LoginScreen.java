@@ -13,11 +13,17 @@ public class LoginScreen {
 
     private static final String DISMISS_DIALOG = "button2";
     private static final String WELCOME_TO_SPARK_TOOLBAR = "toolbar";
-    private static final String ID_LOGIN_EMAIL = "email_address";
-    private static final String ID_LOGIN_PASSWORD = "password";
-    private static final String ID_SIGN_IN_BUTTON = "email_sign_in_button";
+    private static final String ID_LOGIN_EMAIL = "nz.co.telecom.smartphone.android:id/textInputLayout";
+    private static final String ID_LOGIN_PASSWORD = "nz.co.telecom.smartphone.android:id/password";
+    private static final String ID_SIGN_IN_BUTTON = "nz.co.telecom.smartphone.android:id/signInButton";
+    private static final String ID_FACEBOOK_LOGIN = "nz.co.telecom.smartphone.android:id/facebookSignInButton";
     private static final String TO_DO = "TO DO";
     private static final String SET_UP_ACCESS_CARD = "Set Up Access Card";
+    private static final String ID_GOOGLE_LOGIN = "nz.co.telecom.smartphone.android:id/googlePlusSignInButton";
+    private static final String APPLE_ALLOW = "Allow";
+    private static final String XPATH_LOGIN_EMAIL_IPHONE = "//XCUIElementTypeApplication[@name=\"SparkDevRel\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeTextField";
+    private static final String XPATH_LOGIN_PASSWORD_IPHONE = "//XCUIElementTypeApplication[@name=\"SparkDevRel\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther[4]/XCUIElementTypeSecureTextField";
+    private static final String ID_SIGN_IN_BUTTON_IPHONE = "SIGN IN";
 
     private final AppiumDriver appiumDriver;
     private final AppScreen appScreen;
@@ -79,5 +85,34 @@ public class LoginScreen {
                 findFirst().
                 get();
         cardTile.click();
+    }
+
+    public boolean verifyEmailFieldIsDisplayed() {
+        return appiumDriver.findElement(By.id(ID_LOGIN_EMAIL)).isDisplayed();
+    }
+
+    public void clickFacebookLoginLink() {
+
+        appiumDriver.findElement(By.id(ID_FACEBOOK_LOGIN)).click();
+    }
+
+    public void clickGoogleLoginLink() {
+        appiumDriver.findElement(By.id(ID_GOOGLE_LOGIN)).click();
+    }
+
+    public void clickAppleAllow() {
+        appiumDriver.findElement(By.id(APPLE_ALLOW)).click();
+    }
+
+    public void enterEmailOnIphone(String email) {
+        appiumDriver.findElement(By.xpath(XPATH_LOGIN_EMAIL_IPHONE)).sendKeys(email);
+    }
+
+    public void enterPasswordOnIphone(String password) {
+        appiumDriver.findElement(By.xpath(XPATH_LOGIN_PASSWORD_IPHONE)).sendKeys(password);
+    }
+
+    public void clickSignInOnIphone() {
+        appiumDriver.findElement(By.id(ID_SIGN_IN_BUTTON_IPHONE)).click();
     }
 }

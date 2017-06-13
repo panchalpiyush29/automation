@@ -1,7 +1,13 @@
-@regression @login
+@top-up
 Feature: Login with a valid user
 
-  Scenario: I can login successfully
+  Background: I am logged in
     Given I am a "valid" user
     When I login as the user
-    Then I can see the welcome page after skipping the welcome video
+
+
+  Scenario: I can login successfully
+    Then I can see the Hamburger icon
+
+  Scenario: I can logout successfully
+    Then I can Logout

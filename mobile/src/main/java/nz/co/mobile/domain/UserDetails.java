@@ -8,12 +8,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class UserDetails {
     private final String email;
     private final String password;
+    private final String cardNumber;
+    private final String x;
 
     @JsonCreator
     public UserDetails(@JsonProperty("email") String email,
-                       @JsonProperty("password") String password) {
+                       @JsonProperty("password") String password,
+                       @JsonProperty("cardNumber") String cardNumber,
+                       @JsonProperty("x") String x) {
         this.email = email;
         this.password = password;
+        this.cardNumber = cardNumber;
+        this.x = x;
     }
 
     public String getEmail() {
@@ -24,6 +30,14 @@ public class UserDetails {
         return password;
     }
 
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public String getX() {
+        return x;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -31,23 +45,29 @@ public class UserDetails {
 
         UserDetails that = (UserDetails) o;
 
-        if (getEmail() != null ? !getEmail().equals(that.getEmail()) : that.getEmail() != null) return false;
-        return getPassword() != null ? getPassword().equals(that.getPassword()) : that.getPassword() == null;
+        if (!email.equals(that.email)) return false;
+        if (!password.equals(that.password)) return false;
+        if (!cardNumber.equals(that.cardNumber)) return false;
+        return x.equals(that.x);
+
     }
 
     @Override
     public int hashCode() {
-        int result = getEmail() != null ? getEmail().hashCode() : 0;
-        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
+        int result = email.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + cardNumber.hashCode();
+        result = 31 * result + x.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("UserDetails{");
-        sb.append("email='").append(email).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "UserDetails{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", x='" + x + '\'' +
+                '}';
     }
 }
