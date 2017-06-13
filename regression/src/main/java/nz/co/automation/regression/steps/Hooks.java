@@ -4,38 +4,47 @@ import com.codeborne.selenide.WebDriverRunner;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import nz.co.automation.regression.AutomationConfiguration;
 import nz.co.automation.regression.saucelabs.SaucelabsClient;
+import nz.co.automation.regression.saucelabs.SaucelabsDriverManager;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootContextLoader;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static com.codeborne.selenide.Selenide.close;
 import static org.openqa.selenium.OutputType.BYTES;
 
-public class Hooks extends BaseSteps {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = AutomationConfiguration.class, loader = SpringBootContextLoader.class)
+@SpringBootTest
+public class Hooks {
 
     private final Environment environment;
-    private final RemoteWebDriver saucelabsDriver;
+    private final SaucelabsDriverManager saucelabsDriverManager;
     private final SaucelabsClient saucelabsClient;
 
     @Autowired
-    public Hooks(Environment environment, RemoteWebDriver saucelabsDriver, SaucelabsClient saucelabsClient) {
+    public Hooks(Environment environment, SaucelabsDriverManager saucelabsDriverManager, SaucelabsClient saucelabsClient) {
         this.environment = environment;
-        this.saucelabsDriver = saucelabsDriver;
+        this.saucelabsDriverManager = saucelabsDriverManager;
         this.saucelabsClient = saucelabsClient;
     }
 
     @Before
     public void beforeScenario() {
         if (isSaucelabsEnabled()) {
-            WebDriverRunner.setWebDriver(saucelabsDriver);
+            WebDriverRunner.setWebDriver(saucelabsDriverManager.getSauceLabsDriver());
         }
     }
 
     @After
-    public void afterScenario (Scenario scenario) {
+    public void afterScenario(Scenario scenario) {
         try {
             if (isSaucelabsEnabled()) {
                 saucelabsClient.updateCurrentJob(scenario);
