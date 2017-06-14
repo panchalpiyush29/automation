@@ -65,6 +65,6 @@ public class LoginSteps extends BaseSteps {
         loginScreen.enterEmailOnIphone(userDetails.getEmail());
         loginScreen.enterPasswordOnIphone(userDetails.getPassword());
         loginScreen.clickSignInOnIphone();
-        //homescreen.allowAccess();
+        homescreen.allowAccessOnIphone();
     }
 }

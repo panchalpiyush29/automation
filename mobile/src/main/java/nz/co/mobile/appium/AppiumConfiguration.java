@@ -29,20 +29,20 @@ public class AppiumConfiguration {
         desiredCapabilities.setCapability("appPackage", "nz.co.telecom.smartphone.android");
         desiredCapabilities.setCapability("appActivity", "nz.co.telecom.smartphone.activity.ActivityWelcome");
 
-/*        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+        /*    DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("udid", "F8270F6A-7A28-4016-84D2-C125CFE17E0A");
         desiredCapabilities.setCapability("XCUITest", "automationName");
         desiredCapabilities.setCapability("deviceName", "iPhone 7");
         desiredCapabilities.setCapability("platformName", "iOS");
         desiredCapabilities.setCapability("platformVersion", "10.1");
         desiredCapabilities.setCapability("app", "/Users/t967085/Downloads/SparkDevRel.ipa");
-        desiredCapabilities.setCapability("bundleId", "nz.co.telecom.TNZSmartphone.beta.dev");*/
+        desiredCapabilities.setCapability("bundleId", "nz.co.telecom.TNZSmartphone.beta.dev"); */
 
-        //desiredCapabilities.setCapability("appActivity", "nz.co.telecom.smartphone.activity.ActivityWelcome");
 
         // appium
-        AppiumDriver driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
-          // AppiumDriver driver = new IOSDriver(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
+             AppiumDriver driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
+
+         //  AppiumDriver driver = new IOSDriver(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
 
         // configure appium
         driver.manage().timeouts().implicitlyWait(2L, TimeUnit.MINUTES);

@@ -24,6 +24,7 @@ public class LoginScreen {
     private static final String XPATH_LOGIN_EMAIL_IPHONE = "//XCUIElementTypeApplication[@name=\"SparkDevRel\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeTextField";
     private static final String XPATH_LOGIN_PASSWORD_IPHONE = "//XCUIElementTypeApplication[@name=\"SparkDevRel\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther[4]/XCUIElementTypeSecureTextField";
     private static final String ID_SIGN_IN_BUTTON_IPHONE = "SIGN IN";
+    private static final String ID_LOGIN_EMAIL_IPHONE = "Email or mobile";
 
     private final AppiumDriver appiumDriver;
     private final AppScreen appScreen;
@@ -114,5 +115,11 @@ public class LoginScreen {
 
     public void clickSignInOnIphone() {
         appiumDriver.findElement(By.id(ID_SIGN_IN_BUTTON_IPHONE)).click();
+    }
+
+    public boolean verifyEmailFieldIsDisplayedONIphone() {
+
+        return appiumDriver.findElement(By.id(ID_LOGIN_EMAIL_IPHONE)).isDisplayed();
+
     }
 }
