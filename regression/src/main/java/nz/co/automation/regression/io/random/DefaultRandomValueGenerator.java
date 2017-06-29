@@ -2,11 +2,11 @@ package nz.co.automation.regression.io.random;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import static java.lang.String.format;
-import static org.springframework.util.Assert.hasText;
 
 public class DefaultRandomValueGenerator implements RandomValueGenerator {
 
@@ -14,7 +14,9 @@ public class DefaultRandomValueGenerator implements RandomValueGenerator {
 
     @Override
     public String generateRandomValueIfRequired(String text) {
-        hasText(text);
+        if (StringUtils.isBlank(text)) {
+            return text;
+        }
 
         if (text.contains(RandomKeyWord.RANDOM_TEXT_NUMBER.getCode())) {
             text = text.replaceAll(RandomKeyWord.RANDOM_TEXT_NUMBER.getCode(), RandomStringUtils.randomAlphanumeric(20));
