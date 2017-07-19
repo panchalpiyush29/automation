@@ -73,6 +73,16 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-    
 </project>
