@@ -1,11 +1,14 @@
 package nz.co.automation.regression.saucelabs;
 
+import nz.co.automation.regression.cryptocipher.ValueCryptoCipher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix = "saucelabs")
 public class SaucelabsProperties {
+    private final ValueCryptoCipher valueCryptoCipher;
     private String domain;
     private String username;
     private String password;
@@ -15,6 +18,13 @@ public class SaucelabsProperties {
     private String restDomain;
     private String browserName;
     private String browserVersion;
+
+    @Autowired
+    public SaucelabsProperties(
+            ValueCryptoCipher valueCryptoCipher
+    ){
+        this.valueCryptoCipher = valueCryptoCipher;
+    }
 
     public String getDomain() {
         return domain;
@@ -37,7 +47,7 @@ public class SaucelabsProperties {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = valueCryptoCipher.decrypt(password);
     }
 
     public String getAutomationTunnel() {
