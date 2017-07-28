@@ -22,6 +22,7 @@ public class GoogleStepsTest {
     private QueryHolder queryHolder;
     private GoogleHomePage googleHomePage;
 
+
     @Before
     public void setUp() throws Exception {
         browser = mock(Browser.class);

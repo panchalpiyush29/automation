@@ -7,7 +7,9 @@ public class Query {
     private String query;
 
     @JsonCreator
-    public Query(@JsonProperty("query") String query) {
+    public Query(
+            @JsonProperty("query") String query)
+    {
         this.query = query;
     }
 

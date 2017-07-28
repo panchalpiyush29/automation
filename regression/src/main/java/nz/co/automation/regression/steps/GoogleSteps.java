@@ -1,8 +1,11 @@
 package nz.co.automation.regression.steps;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import nz.co.automation.regression.domain.Login;
+import nz.co.automation.regression.domain.LoginHolder;
 import nz.co.automation.regression.domain.Query;
 import nz.co.automation.regression.domain.QueryHolder;
 import nz.co.automation.regression.io.ModelFactory;
@@ -19,6 +22,7 @@ public class GoogleSteps {
     private ModelFactory modelFactory;
     private final QueryHolder queryHolder;
     private final GoogleHomePage googleHomePage;
+
 
     @Autowired
     public GoogleSteps(Browser browser, ModelFactory modelFactory, QueryHolder queryHolder, GoogleHomePage googleHomePage) {
@@ -50,4 +54,9 @@ public class GoogleSteps {
         assertThat(googleHomePage.hasResults()).isTrue();
     }
 
+    @And("^I am on gmail login page$")
+    public void iAmOnGmailLoginPage() throws Throwable {
+        googleHomePage.navigateToGmail();
+
+    }
 }
