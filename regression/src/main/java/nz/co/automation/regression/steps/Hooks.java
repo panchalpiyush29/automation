@@ -57,7 +57,6 @@ public class Hooks {
             }
         } finally {
             if (isSaucelabsEnabled()) {
-                close();
             }
         }
     }
