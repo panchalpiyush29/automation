@@ -7,7 +7,6 @@ import cucumber.api.java.en.When;
 import nz.co.automation.regression.domain.Login;
 import nz.co.automation.regression.domain.LoginHolder;
 import nz.co.automation.regression.io.ModelFactory;
-import nz.co.automation.regression.pages.Browser;
 import nz.co.automation.regression.pages.GmailPage;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,14 +17,13 @@ public class LoginSteps {
     private GmailPage gmailPage;
     private ModelFactory modelFactory;
     private LoginHolder loginHolder;
-    private Browser browser;
 
     @Autowired
-    public LoginSteps(GmailPage gmailPage, ModelFactory modelFactory, LoginHolder loginHolder, Browser browser) {
+    public LoginSteps(GmailPage gmailPage, ModelFactory modelFactory, LoginHolder loginHolder) {
         this.gmailPage = gmailPage;
         this.modelFactory = modelFactory;
         this.loginHolder = loginHolder;
-        this.browser = browser;
+
     }
 
     @Given("^I am a \"([^\"]*)\" user$")
@@ -45,9 +43,4 @@ public class LoginSteps {
         assertThat(gmailPage.loggedInUser()).isTrue();
     }
 
-    @And("^I am not logged in$")
-    public void iAmNotLoggedIn() throws Throwable {
-
-
-    }
 }

@@ -2,7 +2,6 @@
 Feature: Do a google search
 
   Background:
-    Given I am not logged in
     Given I am on google page
 
   Scenario: Google search should return the correct result
