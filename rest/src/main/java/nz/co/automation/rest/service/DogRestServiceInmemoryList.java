@@ -4,6 +4,7 @@ import nz.co.automation.rest.domain.Dog;
 import nz.co.automation.rest.exception.DogAlreadyExistException;
 import nz.co.automation.rest.exception.DogNotFoundException;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Service
+@ConditionalOnProperty(name = "dog.service.inmemory", havingValue = "true")
 public class DogRestServiceInmemoryList implements DogRestService {
 
     private Set<Dog> dogs = new HashSet<Dog>();
