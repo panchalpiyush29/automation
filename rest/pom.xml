@@ -57,6 +57,13 @@
             <version>3.4</version>
         </dependency>
 
+        <!-- H2 in memory database -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.196</version>
+        </dependency>
+
         <!-- Spring test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
