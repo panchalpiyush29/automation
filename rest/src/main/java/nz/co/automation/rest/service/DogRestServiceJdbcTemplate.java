@@ -5,11 +5,13 @@ import nz.co.automation.rest.exception.DogNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -59,18 +61,38 @@ public class DogRestServiceJdbcTemplate implements DogRestService {
     }
   }
 
+  // TODO: throw exception on attempt to create existing dog
   @Override
   public Dog createDog(String name, Integer age) {
-    return null;
+    // create prepared statement
+    PreparedStatementCreator preparedStatementCreator = new PreparedStatementCreator() {
+      @Override
+      public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+        final PreparedStatement preparedStatement = connection.prepareStatement("insert into dogs(name, age) values(?, ?)", Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setString(1, name);
+        preparedStatement.setInt(2, age);
+        return preparedStatement;
+      }
+    };
+
+    // key holder
+    KeyHolder keyHolder = new GeneratedKeyHolder();
+
+    // execute create
+    jdbcTemplate.update(preparedStatementCreator, keyHolder);
+
+    return new Dog(keyHolder.getKeys().get("id").toString(), name, age);
   }
 
   @Override
   public void updateDogById(String id, String name, Integer age) {
-
+    // TODO: implement this
+    throw new UnsupportedOperationException("Not Implemented Yet!");
   }
 
   @Override
   public void deleteDog(String id) {
-
+    // TODO: implement this
+    throw new UnsupportedOperationException("Not Implemented Yet!");
   }
 }
