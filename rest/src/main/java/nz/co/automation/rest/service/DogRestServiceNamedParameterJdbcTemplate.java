@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service("dogRestServiceNamedParameterJdbcTemplate")
 public class DogRestServiceNamedParameterJdbcTemplate implements DogRestService {
@@ -30,7 +28,9 @@ public class DogRestServiceNamedParameterJdbcTemplate implements DogRestService 
 
   @Override
   public Dog getDog(String id) {
-    return null;
+    Map<String, Object> paramMap = new HashMap();
+    paramMap.put("id", Integer.parseInt(id));
+    return namedParameterJdbcTemplate.queryForObject("select * from dogs where id = :id", paramMap, dogRowMapper);
   }
 
   @Override
