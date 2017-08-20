@@ -17,7 +17,7 @@ public class DogRestController {
   private DogRestService dogRestService;
 
   @Autowired
-  public DogRestController(@Qualifier("dogRestServiceDatabase") DogRestService dogRestService) {
+  public DogRestController(@Qualifier("dogRestServiceJdbcTemplate") DogRestService dogRestService) {
     this.dogRestService = dogRestService;
   }
 

@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-@Service
+@Service("dogRestServiceInmemoryList")
 public class DogRestServiceInmemoryList implements DogRestService {
 
   private Set<Dog> dogs = new HashSet<Dog>();

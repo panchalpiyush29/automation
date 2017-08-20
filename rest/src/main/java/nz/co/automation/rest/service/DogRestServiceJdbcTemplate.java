@@ -1,31 +1,30 @@
 package nz.co.automation.rest.service;
 
 import nz.co.automation.rest.domain.Dog;
+import nz.co.automation.rest.exception.DogNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
-import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service
-public class DogRestServiceDatabase implements DogRestService {
+@Service("dogRestServiceJdbcTemplate")
+public class DogRestServiceJdbcTemplate implements DogRestService {
 
-  private static final String SELECT_DOG = "select * from dogs where id = :id";
-  private final DataSource dataSource;
+  private static final String PREPARE_STATEMENT_SQL_SELECT_DOG = "select * from dogs where id = ?";
   private final JdbcTemplate jdbcTemplate;
-  private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
   @Autowired
-  public DogRestServiceDatabase(DataSource dataSource) {
-    this.dataSource = dataSource;
-    jdbcTemplate = new JdbcTemplate(dataSource);
-    namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+  public DogRestServiceJdbcTemplate(JdbcTemplate jdbcTemplate) {
+    this.jdbcTemplate = jdbcTemplate;
   }
 
   @Override
@@ -45,7 +44,19 @@ public class DogRestServiceDatabase implements DogRestService {
 
   @Override
   public Dog getDog(String id) {
-    return null;
+    // create row mapper
+    RowMapper<Dog> dogRowMapper = new RowMapper<Dog>() {
+      @Override
+      public Dog mapRow(ResultSet resultSet, int i) throws SQLException {
+        return new Dog(resultSet.getString("id"), resultSet.getString("name"), resultSet.getInt("age"));
+      }
+    };
+
+    try {
+      return jdbcTemplate.queryForObject("select * from dogs where id = " + id, dogRowMapper);
+    } catch (EmptyResultDataAccessException e) {
+      throw new DogNotFoundException(id);
+    }
   }
 
   @Override
