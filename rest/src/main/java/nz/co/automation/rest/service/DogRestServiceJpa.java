@@ -28,8 +28,8 @@ public class DogRestServiceJpa implements DogRestService {
   }
 
   @Override
-  public Dog getDog(String id) {
-    return dogsRepository.findOne(Integer.parseInt(id));
+  public Dog getDog(Integer id) {
+    return dogsRepository.findOne(id);
   }
 
   @Override
@@ -41,12 +41,12 @@ public class DogRestServiceJpa implements DogRestService {
   }
 
   @Override
-  public void updateDogById(String id, String name, Integer age) {
+  public void updateDogById(Integer id, String name, Integer age) {
     dogsRepository.save(new Dog(id, name, age));
   }
 
   @Override
-  public void deleteDog(String id) {
-    dogsRepository.delete(Integer.parseInt(id));
+  public void deleteDog(Integer id) {
+    dogsRepository.delete(id);
   }
 }

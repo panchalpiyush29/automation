@@ -11,6 +11,6 @@ import java.sql.SQLException;
 public class DogRowMapper implements RowMapper<Dog> {
   @Override
   public Dog mapRow(ResultSet rs, int rowNum) throws SQLException {
-    return new Dog(rs.getString("id"), rs.getString("name"), rs.getInt("age"));
+    return new Dog(rs.getInt("id"), rs.getString("name"), rs.getInt("age"));
   }
 }

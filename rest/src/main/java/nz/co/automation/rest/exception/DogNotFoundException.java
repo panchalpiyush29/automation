@@ -7,7 +7,7 @@ import static java.lang.String.format;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class DogNotFoundException extends RuntimeException {
-    public DogNotFoundException(String id) {
+    public DogNotFoundException(Integer id) {
         super(format("Unable to find dog with id %s", id));
     }
 }

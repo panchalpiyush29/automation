@@ -22,7 +22,6 @@ import java.util.Set;
 @Service("dogRestServiceJdbcTemplate")
 public class DogRestServiceJdbcTemplate implements DogRestService {
 
-  private static final String PREPARE_STATEMENT_SQL_SELECT_DOG = "select * from dogs where id = ?";
   private final JdbcTemplate jdbcTemplate;
   private final DogRowMapper dogRowMapper;
 
@@ -39,7 +38,7 @@ public class DogRestServiceJdbcTemplate implements DogRestService {
   }
 
   @Override
-  public Dog getDog(String id) {
+  public Dog getDog(Integer id) {
     try {
       return jdbcTemplate.queryForObject("select * from dogs where id = " + id, dogRowMapper);
     } catch (EmptyResultDataAccessException e) {
@@ -67,17 +66,17 @@ public class DogRestServiceJdbcTemplate implements DogRestService {
     // execute create
     jdbcTemplate.update(preparedStatementCreator, keyHolder);
 
-    return new Dog(keyHolder.getKeys().get("id").toString(), name, age);
+    return new Dog(Integer.valueOf(keyHolder.getKeys().get("id").toString()), name, age);
   }
 
   @Override
-  public void updateDogById(String id, String name, Integer age) {
+  public void updateDogById(Integer id, String name, Integer age) {
     // TODO: implement this
     throw new UnsupportedOperationException("Not Implemented Yet!");
   }
 
   @Override
-  public void deleteDog(String id) {
+  public void deleteDog(Integer id) {
     // TODO: implement this
     throw new UnsupportedOperationException("Not Implemented Yet!");
   }

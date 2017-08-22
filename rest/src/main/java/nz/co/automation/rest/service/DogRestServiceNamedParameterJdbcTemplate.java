@@ -27,9 +27,9 @@ public class DogRestServiceNamedParameterJdbcTemplate implements DogRestService 
   }
 
   @Override
-  public Dog getDog(String id) {
+  public Dog getDog(Integer id) {
     Map<String, Object> paramMap = new HashMap();
-    paramMap.put("id", Integer.parseInt(id));
+    paramMap.put("id", id);
     return namedParameterJdbcTemplate.queryForObject("select * from dogs where id = :id", paramMap, dogRowMapper);
   }
 
@@ -39,12 +39,12 @@ public class DogRestServiceNamedParameterJdbcTemplate implements DogRestService 
   }
 
   @Override
-  public void updateDogById(String id, String name, Integer age) {
+  public void updateDogById(Integer id, String name, Integer age) {
 
   }
 
   @Override
-  public void deleteDog(String id) {
+  public void deleteDog(Integer id) {
 
   }
 }

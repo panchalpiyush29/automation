@@ -27,7 +27,7 @@ public class DogRestController {
   }
 
   @RequestMapping(path = "{id}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-  public Dog getDog(@PathVariable("id") String id) {
+  public Dog getDog(@PathVariable("id") Integer id) {
     return dogRestService.getDog(id);
   }
 
@@ -40,7 +40,7 @@ public class DogRestController {
   }
 
   @RequestMapping(path = "{id}", method = RequestMethod.PUT, produces = APPLICATION_JSON_VALUE)
-  public UpdateDogResponse updateDog(@PathVariable("id") String id, @RequestBody UpdateDogRequest updateDogRequest) {
+  public UpdateDogResponse updateDog(@PathVariable("id") Integer id, @RequestBody UpdateDogRequest updateDogRequest) {
     final String name = updateDogRequest.getName();
     final Integer age = updateDogRequest.getAge();
     dogRestService.updateDogById(id, name, age);
@@ -48,7 +48,7 @@ public class DogRestController {
   }
 
   @RequestMapping(path = "{id}", method = RequestMethod.DELETE, produces = APPLICATION_JSON_VALUE)
-  public DeleteDogResponse delete(@PathVariable("id") String id) {
+  public DeleteDogResponse delete(@PathVariable("id") Integer id) {
     dogRestService.deleteDog(id);
     return new DeleteDogResponse(RestStatus.SUCCESS, id);
   }

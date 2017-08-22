@@ -7,17 +7,18 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
-import java.util.UUID;
 
 @Service("dogRestServiceInmemoryList")
 public class DogRestServiceInmemoryList implements DogRestService {
 
+  private final Random random = new Random();
   private Set<Dog> dogs = new HashSet<Dog>();
 
   public DogRestServiceInmemoryList() {
-    Dog dog1 = new Dog(UUID.randomUUID().toString(), "St Bernard", 1);
-    Dog dog2 = new Dog(UUID.randomUUID().toString(), "Chow Chow", 2);
+    Dog dog1 = new Dog(random.nextInt(), "St Bernard", 1);
+    Dog dog2 = new Dog(random.nextInt(), "Chow Chow", 2);
     dogs.add(dog1);
     dogs.add(dog2);
   }
@@ -28,7 +29,7 @@ public class DogRestServiceInmemoryList implements DogRestService {
   }
 
   @Override
-  public Dog getDog(String id) {
+  public Dog getDog(Integer id) {
     for (Dog dog : dogs) {
       if (id.equals(dog.getId())) {
         return dog;
@@ -40,7 +41,7 @@ public class DogRestServiceInmemoryList implements DogRestService {
 
   @Override
   public Dog createDog(String name, Integer age) {
-    Dog dog = new Dog(UUID.randomUUID().toString(), name, age);
+    Dog dog = new Dog(random.nextInt(), name, age);
     if (!dogs.add(dog)) {
       throw new DogAlreadyExistException(dog);
     }
@@ -48,7 +49,7 @@ public class DogRestServiceInmemoryList implements DogRestService {
   }
 
   @Override
-  public void updateDogById(String id, String name, Integer age) {
+  public void updateDogById(Integer id, String name, Integer age) {
     for (Dog dog : dogs) {
       if (id.equals(dog.getId())) {
         if (StringUtils.isNotBlank(name)) {
@@ -67,7 +68,7 @@ public class DogRestServiceInmemoryList implements DogRestService {
   }
 
   @Override
-  public void deleteDog(String id) {
+  public void deleteDog(Integer id) {
     for (Dog dog : dogs) {
       if (id.equals(dog.getId())) {
         dogs.remove(dog);
