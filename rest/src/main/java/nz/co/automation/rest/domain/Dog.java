@@ -1,15 +1,13 @@
 package nz.co.automation.rest.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "dogs")
 public class Dog {
 
   @Id
+  @GeneratedValue
   @Column(name = "id")
   private Integer id;
 

@@ -35,8 +35,8 @@ public class DogRestServiceJpa implements DogRestService {
   @Override
   public Dog createDog(String name, Integer age) {
     final Dog dog = new Dog();
-    dog.setName("New Dog");
-    dog.setAge(3);
+    dog.setName(name);
+    dog.setAge(age);
     return dogsRepository.save(dog);
   }
 

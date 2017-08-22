@@ -4,3 +4,5 @@ create table dogs (
   age int not null,
   primary key (id)
 );
+
+create sequence hibernate_sequence;
