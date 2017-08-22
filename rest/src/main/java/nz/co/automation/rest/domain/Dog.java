@@ -1,10 +1,23 @@
 package nz.co.automation.rest.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "dogs")
 public class Dog {
 
+    @Id
+    @Column(name = "id")
     private String id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "age")
     private Integer age;
+
+    public Dog() {
+    }
 
     public Dog(String id, String name, Integer age) {
         this.id = id;
@@ -22,6 +35,10 @@ public class Dog {
 
     public Integer getAge() {
         return age;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setName(String name) {
