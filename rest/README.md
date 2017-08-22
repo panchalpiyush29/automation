@@ -1,21 +1,23 @@
 # How to launch the rest service
 ## On IntelliJ 
-Run `nz.co.automation.rest.RestApplication`.
+Run `nz.co.automation.rest.RestApplication`
 
 ## On Commandline
-Run `mvn spring-boot:run`.
+Run `mvn spring-boot:run`
 
 # How to access h2-console 
-* Set `spring.h2.console.enabled=true` .
-* Console is accessible on url `localhost:8089/h2-console`.
+* Set `spring.h2.console.enabled=true`
+* Console is accessible on url `localhost:8089/h2-console`
 
 # Docker Postgres Database schema
+
 ## Create user and database
 * `create user automation;`
 * `alter role automation with password 'automation';`
 * `create database automation_db;`
 * `grant connect on database gasmon_db to gasmon;`
 * `revoke connect on database gasmon_db from public;`
+
 ## Create table, data and sequence for the id
 * Create table dogs with id generated from sequence_dog_id table
     ```
