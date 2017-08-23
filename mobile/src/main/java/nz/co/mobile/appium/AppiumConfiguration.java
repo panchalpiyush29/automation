@@ -23,9 +23,9 @@ public class AppiumConfiguration {
 
         // appium capabilities
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability("deviceName", "Nexus_6_API_23");
+        desiredCapabilities.setCapability("deviceName", "Pixcel_XL_API_23");
         desiredCapabilities.setCapability("platform", "Android");
-        desiredCapabilities.setCapability("app", "/Users/t967085/Downloads/20170428.apk");
+        desiredCapabilities.setCapability("app", "/Users/piyushpanchal/Downloads/spark-app.apk");
         desiredCapabilities.setCapability("appPackage", "nz.co.telecom.smartphone.android");
         desiredCapabilities.setCapability("appActivity", "nz.co.telecom.smartphone.activity.ActivityWelcome");
 

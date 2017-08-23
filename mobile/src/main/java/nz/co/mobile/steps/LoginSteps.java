@@ -7,7 +7,6 @@ import cucumber.api.java.en.When;
 import nz.co.mobile.domain.ModelFactory;
 import nz.co.mobile.domain.UserDetails;
 import nz.co.mobile.holder.UserDetailsHolder;
-import nz.co.mobile.screen.HomeScreen;
 import nz.co.mobile.screen.LoginScreen;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,14 +16,12 @@ public class LoginSteps extends BaseSteps {
     private UserDetailsHolder userDetailsHolder;
     private LoginScreen loginScreen;
     private ModelFactory modelFactory;
-    private HomeScreen homescreen;
 
     @Autowired
-    public LoginSteps(UserDetailsHolder userDetailsHolder, LoginScreen loginScreen, ModelFactory modelFactory, HomeScreen homescreen) {
+    public LoginSteps(UserDetailsHolder userDetailsHolder, LoginScreen loginScreen, ModelFactory modelFactory) {
         this.userDetailsHolder = userDetailsHolder;
         this.loginScreen = loginScreen;
         this.modelFactory = modelFactory;
-        this.homescreen = homescreen;
     }
 
     @Given("^I am a \"([^\"]*)\" user$")
@@ -39,7 +36,6 @@ public class LoginSteps extends BaseSteps {
         loginScreen.enterEmail(userDetails.getEmail());
         loginScreen.enterPassword(userDetails.getPassword());
         loginScreen.clickSignIn();
-        homescreen.allowAccess();
     }
 
     @Then("^I can see the welcome page after skipping the welcome video$")
@@ -65,6 +61,5 @@ public class LoginSteps extends BaseSteps {
         loginScreen.enterEmailOnIphone(userDetails.getEmail());
         loginScreen.enterPasswordOnIphone(userDetails.getPassword());
         loginScreen.clickSignInOnIphone();
-        homescreen.allowAccessOnIphone();
     }
 }
