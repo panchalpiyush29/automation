@@ -16,42 +16,39 @@ import static java.lang.String.format;
 @Component
 public class SaucelabsDriverManager {
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
-    private final SaucelabsProperties saucelabsProperties;
-    private RemoteWebDriver saucelabsDriver;
+  private final Logger log = LoggerFactory.getLogger(getClass());
+  private final SaucelabsProperties saucelabsProperties;
+  private RemoteWebDriver saucelabsDriver;
 
-    @Autowired
-    public SaucelabsDriverManager(SaucelabsProperties saucelabsProperties) {
-        this.saucelabsProperties = saucelabsProperties;
+  @Autowired
+  public SaucelabsDriverManager(SaucelabsProperties saucelabsProperties) {
+    this.saucelabsProperties = saucelabsProperties;
+  }
+
+  public RemoteWebDriver getSauceLabsDriver() {
+    try {
+      return saucelabsDriver = createSaucelabsDriver();
+    } catch (MalformedURLException e) {
+      throw new IllegalStateException("Failed to create saucelabs driver!", e);
+    }
+  }
+
+  private RemoteWebDriver createSaucelabsDriver() throws MalformedURLException {
+
+    // browser capabilities
+    final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+    capabilities.setCapability("screenResolution", saucelabsProperties.getAutomationResolution());
+    capabilities.setCapability("tunnel-identifier", saucelabsProperties.getAutomationTunnel());
+    capabilities.setCapability("platform", saucelabsProperties.getAutomationPlatform());
+
+    if (StringUtils.isNotBlank(saucelabsProperties.getBrowserName()) &&
+            StringUtils.isNotBlank(saucelabsProperties.getBrowserVersion())) {
+      capabilities.setCapability("browserName", saucelabsProperties.getBrowserName());
+      capabilities.setCapability("version", saucelabsProperties.getBrowserVersion());
     }
 
-    public RemoteWebDriver getSauceLabsDriver() {
-        if (saucelabsDriver == null) {
-            try {
-                saucelabsDriver = createSaucelabsDriver();
-            } catch (MalformedURLException e) {
-                log.error("Failed to create saucelabs driver!", e);
-            }
-        }
-        return saucelabsDriver;
-    }
-
-    private RemoteWebDriver createSaucelabsDriver() throws MalformedURLException {
-
-        // browser capabilities
-        final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        capabilities.setCapability("screenResolution", saucelabsProperties.getAutomationResolution());
-        capabilities.setCapability("tunnel-identifier", saucelabsProperties.getAutomationTunnel());
-        capabilities.setCapability("platform", saucelabsProperties.getAutomationPlatform());
-
-        if (StringUtils.isNotBlank(saucelabsProperties.getBrowserName()) &&
-                StringUtils.isNotBlank(saucelabsProperties.getBrowserVersion())) {
-            capabilities.setCapability("browserName", saucelabsProperties.getBrowserName());
-            capabilities.setCapability("version", saucelabsProperties.getBrowserVersion());
-        }
-
-        // saucelabs
-        final String saucelabsUrl = format("https://%s:%s@%s/wd/hub", saucelabsProperties.getUsername(), saucelabsProperties.getPassword(), saucelabsProperties.getDomain());
-        return new RemoteWebDriver(new URL(saucelabsUrl), capabilities);
-    }
+    // saucelabs
+    final String saucelabsUrl = format("https://%s:%s@%s/wd/hub", saucelabsProperties.getUsername(), saucelabsProperties.getPassword(), saucelabsProperties.getDomain());
+    return new RemoteWebDriver(new URL(saucelabsUrl), capabilities);
+  }
 }
