@@ -1,19 +1,39 @@
 package nz.co.automation.regression;
 
 import cucumber.runtime.java.spring.CucumberGlueScopeConfiguration;
+import net.masterthought.cucumber.Configuration;
+import net.masterthought.cucumber.ReportBuilder;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.File;
+import java.util.Collections;
+import java.util.List;
+
 @ComponentScan({"nz.co.automation"})
 @Import(CucumberGlueScopeConfiguration.class)
 @EnableAutoConfiguration
 public class AutomationConfiguration {
 
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+  @Bean
+  public RestTemplate restTemplate() {
+    return new RestTemplate();
+  }
+
+  @Bean
+  public ReportBuilder reportBuilder() {
+    // json files
+    List<String> jsonFiles = Collections.singletonList("target/cucumber-json-report.json");
+
+    // configuration
+    File reportOutputDirectory = new File("target");
+    String projectName = "regression";
+    Configuration configuration = new Configuration(reportOutputDirectory, projectName);
+
+    // initialise report builder
+    return new ReportBuilder(jsonFiles, configuration);
+  }
 }

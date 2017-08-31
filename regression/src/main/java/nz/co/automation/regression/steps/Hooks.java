@@ -4,7 +4,6 @@ import com.codeborne.selenide.WebDriverRunner;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import net.masterthought.cucumber.Configuration;
 import net.masterthought.cucumber.ReportBuilder;
 import nz.co.automation.regression.AutomationConfiguration;
 import nz.co.automation.regression.saucelabs.SaucelabsClient;
@@ -19,10 +18,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.io.File;
-import java.util.Collections;
-import java.util.List;
-
 import static com.codeborne.selenide.Selenide.close;
 import static org.openqa.selenium.OutputType.BYTES;
 
@@ -34,43 +29,22 @@ public class Hooks {
   private final Environment environment;
   private final SaucelabsDriverManager saucelabsDriverManager;
   private final SaucelabsClient saucelabsClient;
-  private static boolean doneIt = false;
+  private final ReportBuilder reportBuilder;
+  private static boolean globalHooksExecuted = false;
 
   @Autowired
-  public Hooks(Environment environment, SaucelabsDriverManager saucelabsDriverManager, SaucelabsClient saucelabsClient) {
+  public Hooks(Environment environment, SaucelabsDriverManager saucelabsDriverManager, SaucelabsClient saucelabsClient, ReportBuilder reportBuilder) {
     this.environment = environment;
     this.saucelabsDriverManager = saucelabsDriverManager;
     this.saucelabsClient = saucelabsClient;
+    this.reportBuilder = reportBuilder;
+    executeGlobalHooks();
   }
 
   @Before
   public void beforeScenario() {
     if (isSaucelabsEnabled()) {
       WebDriverRunner.setWebDriver(saucelabsDriverManager.getSauceLabsDriver());
-    }
-
-    executeGlobalHooks();
-  }
-
-  public void executeGlobalHooks() {
-    if (!doneIt) {
-      // json files
-      List<String> jsonFiles = Collections.singletonList("target/cucumber-json-report.json");
-
-      // configuration
-      File reportOutputDirectory = new File("target");
-      String projectName = "regression";
-      Configuration configuration = new Configuration(reportOutputDirectory, projectName);
-
-      final ReportBuilder reportBuilder = new ReportBuilder(jsonFiles, configuration);
-      Runtime.getRuntime().addShutdownHook(new Thread() {
-        public void run() {
-          System.out.println("-------------- after all! ----------------");
-          reportBuilder.generateReports();
-        }
-      });
-      System.out.println("-------------- before all! ----------------");
-      doneIt = true;
     }
   }
 
@@ -97,4 +71,19 @@ public class Hooks {
     final String property = environment.getProperty("saucelabs.enabled");
     return StringUtils.isNotBlank(property) && property.equals("true");
   }
+
+  private void executeGlobalHooks() {
+    if (!globalHooksExecuted) {
+      // register before all and after all hooks
+      Runtime.getRuntime().addShutdownHook(new Thread() {
+        public void run() {
+          System.out.println("-------------- executing AfterAll hook ----------------\n");
+          reportBuilder.generateReports();
+        }
+      });
+      System.out.println("-------------- executing BeforeAll hook ----------------\n");
+      globalHooksExecuted = true;
+    }
+  }
+
 }
