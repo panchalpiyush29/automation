@@ -6,13 +6,14 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import net.masterthought.cucumber.ReportBuilder;
 import nz.co.automation.regression.AutomationConfiguration;
+import nz.co.automation.regression.annotations.AfterAll;
+import nz.co.automation.regression.annotations.BeforeAll;
 import nz.co.automation.regression.saucelabs.SaucelabsClient;
 import nz.co.automation.regression.saucelabs.SaucelabsDriverManager;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.TakesScreenshot;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,7 +23,7 @@ import static com.codeborne.selenide.Selenide.close;
 import static org.openqa.selenium.OutputType.BYTES;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AutomationConfiguration.class, loader = SpringBootContextLoader.class)
+@ContextConfiguration(classes = AutomationConfiguration.class)
 @SpringBootTest
 public class Hooks {
 
@@ -30,7 +31,6 @@ public class Hooks {
   private final SaucelabsDriverManager saucelabsDriverManager;
   private final SaucelabsClient saucelabsClient;
   private final ReportBuilder reportBuilder;
-  private static boolean globalHooksExecuted = false;
 
   @Autowired
   public Hooks(Environment environment, SaucelabsDriverManager saucelabsDriverManager, SaucelabsClient saucelabsClient, ReportBuilder reportBuilder) {
@@ -38,7 +38,11 @@ public class Hooks {
     this.saucelabsDriverManager = saucelabsDriverManager;
     this.saucelabsClient = saucelabsClient;
     this.reportBuilder = reportBuilder;
-    executeGlobalHooks();
+  }
+
+  @BeforeAll
+  public void beforeAllScenarios() {
+    System.out.println("-------------- executing BeforeAll hook ----------------\n");
   }
 
   @Before
@@ -67,23 +71,15 @@ public class Hooks {
     }
   }
 
+  @AfterAll
+  public void afterAllScenarios() {
+    System.out.println("-------------- executing AfterAll hook ----------------\n");
+    reportBuilder.generateReports();
+  }
+
   private boolean isSaucelabsEnabled() {
     final String property = environment.getProperty("saucelabs.enabled");
     return StringUtils.isNotBlank(property) && property.equals("true");
-  }
-
-  private void executeGlobalHooks() {
-    if (!globalHooksExecuted) {
-      // register before all and after all hooks
-      Runtime.getRuntime().addShutdownHook(new Thread() {
-        public void run() {
-          System.out.println("-------------- executing AfterAll hook ----------------\n");
-          reportBuilder.generateReports();
-        }
-      });
-      System.out.println("-------------- executing BeforeAll hook ----------------\n");
-      globalHooksExecuted = true;
-    }
   }
 
 }

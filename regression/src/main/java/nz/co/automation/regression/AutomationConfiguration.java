@@ -6,6 +6,7 @@ import net.masterthought.cucumber.ReportBuilder;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @ComponentScan({"nz.co.automation"})
 @Import(CucumberGlueScopeConfiguration.class)
 @EnableAutoConfiguration
+@EnableAspectJAutoProxy
 public class AutomationConfiguration {
 
   @Bean

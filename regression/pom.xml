@@ -33,6 +33,18 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
+        <!-- Aspectj -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.8.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.9</version>
+        </dependency>
+
         <!-- Cucumber -->
         <dependency>
             <groupId>info.cukes</groupId>
