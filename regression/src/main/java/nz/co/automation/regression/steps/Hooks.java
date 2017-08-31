@@ -25,44 +25,45 @@ import static org.openqa.selenium.OutputType.BYTES;
 @SpringBootTest
 public class Hooks {
 
-    private final Environment environment;
-    private final SaucelabsDriverManager saucelabsDriverManager;
-    private final SaucelabsClient saucelabsClient;
+  private final Environment environment;
+  private final SaucelabsDriverManager saucelabsDriverManager;
+  private final SaucelabsClient saucelabsClient;
 
-    @Autowired
-    public Hooks(Environment environment, SaucelabsDriverManager saucelabsDriverManager, SaucelabsClient saucelabsClient) {
-        this.environment = environment;
-        this.saucelabsDriverManager = saucelabsDriverManager;
-        this.saucelabsClient = saucelabsClient;
+  @Autowired
+  public Hooks(Environment environment, SaucelabsDriverManager saucelabsDriverManager, SaucelabsClient saucelabsClient) {
+    this.environment = environment;
+    this.saucelabsDriverManager = saucelabsDriverManager;
+    this.saucelabsClient = saucelabsClient;
+  }
+
+  @Before
+  public void beforeScenario() {
+    if (isSaucelabsEnabled()) {
+      WebDriverRunner.setWebDriver(saucelabsDriverManager.getSauceLabsDriver());
     }
+  }
 
-    @Before
-    public void beforeScenario() {
-        if (isSaucelabsEnabled()) {
-            WebDriverRunner.setWebDriver(saucelabsDriverManager.getSauceLabsDriver());
-        }
+  @After
+  public void afterScenario(Scenario scenario) {
+    try {
+      if (isSaucelabsEnabled()) {
+        saucelabsClient.updateCurrentJob(scenario);
+      }
+
+      if (scenario.isFailed()) {
+        final TakesScreenshot takesScreenshot = (TakesScreenshot) WebDriverRunner.getWebDriver();
+        final byte[] screenshot = takesScreenshot.getScreenshotAs(BYTES);
+        scenario.embed(screenshot, "image/png");
+      }
+    } finally {
+      if (isSaucelabsEnabled()) {
+        close();
+      }
     }
+  }
 
-    @After
-    public void afterScenario(Scenario scenario) {
-        try {
-            if (isSaucelabsEnabled()) {
-                saucelabsClient.updateCurrentJob(scenario);
-            }
-
-            if (scenario.isFailed()) {
-                final TakesScreenshot takesScreenshot = (TakesScreenshot) WebDriverRunner.getWebDriver();
-                final byte[] screenshot = takesScreenshot.getScreenshotAs(BYTES);
-                scenario.embed(screenshot, "image/png");
-            }
-        } finally {
-            if (isSaucelabsEnabled()) {
-            }
-        }
-    }
-
-    private boolean isSaucelabsEnabled() {
-        final String property = environment.getProperty("saucelabs.enabled");
-        return StringUtils.isNotBlank(property) && property.equals("true");
-    }
+  private boolean isSaucelabsEnabled() {
+    final String property = environment.getProperty("saucelabs.enabled");
+    return StringUtils.isNotBlank(property) && property.equals("true");
+  }
 }
