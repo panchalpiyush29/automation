@@ -3,11 +3,13 @@ package nz.co.automation.regression;
 import cucumber.runtime.java.spring.CucumberGlueScopeConfiguration;
 import net.masterthought.cucumber.Configuration;
 import net.masterthought.cucumber.ReportBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
@@ -19,6 +21,9 @@ import java.util.List;
 @EnableAutoConfiguration
 @EnableAspectJAutoProxy
 public class AutomationConfiguration {
+
+  @Autowired
+  Environment environment;
 
   @Bean
   public RestTemplate restTemplate() {
@@ -32,7 +37,7 @@ public class AutomationConfiguration {
 
     // configuration
     File reportOutputDirectory = new File("target");
-    String projectName = "regression";
+    String projectName = environment.getProperty("user.dir");
     Configuration configuration = new Configuration(reportOutputDirectory, projectName);
 
     // initialise report builder
