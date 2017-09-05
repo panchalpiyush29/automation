@@ -12,7 +12,7 @@ public interface DogRestService {
 
   Dog createDog(String name, Integer age);
 
-  void updateDogById(Integer id, String name, Integer age);
+  void updateDog(Integer id, String name, Integer age);
 
   void deleteDog(Integer id);
 }

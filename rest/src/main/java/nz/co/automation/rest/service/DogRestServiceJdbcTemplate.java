@@ -70,7 +70,7 @@ public class DogRestServiceJdbcTemplate implements DogRestService {
   }
 
   @Override
-  public void updateDogById(Integer id, String name, Integer age) {
+  public void updateDog(Integer id, String name, Integer age) {
     // TODO: implement this
     throw new UnsupportedOperationException("Not Implemented Yet!");
   }

@@ -39,6 +39,7 @@ public class SwaggerConfiguration {
   private ApiInfo apiInfo() {
     return new ApiInfoBuilder()
             .title("Rest Services")
+            .description("Rest Services Playground")
             .termsOfServiceUrl("http://www.dogs.co.nz")
             .version("1.0")
             .build();

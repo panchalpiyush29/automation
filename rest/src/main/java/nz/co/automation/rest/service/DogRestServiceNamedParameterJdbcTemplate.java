@@ -39,7 +39,7 @@ public class DogRestServiceNamedParameterJdbcTemplate implements DogRestService 
   }
 
   @Override
-  public void updateDogById(Integer id, String name, Integer age) {
+  public void updateDog(Integer id, String name, Integer age) {
 
   }
 

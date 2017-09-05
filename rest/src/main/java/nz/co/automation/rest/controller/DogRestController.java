@@ -44,7 +44,7 @@ public class DogRestController {
   public UpdateDogResponse updateDog(@PathVariable("id") Integer id, @RequestBody UpdateDogRequest updateDogRequest) {
     final String name = updateDogRequest.getName();
     final Integer age = updateDogRequest.getAge();
-    dogRestService.updateDogById(id, name, age);
+    dogRestService.updateDog(id, name, age);
     return new UpdateDogResponse(RestStatus.SUCCESS, id);
   }
 

@@ -49,7 +49,7 @@ public class DogRestServiceInmemoryList implements DogRestService {
   }
 
   @Override
-  public void updateDogById(Integer id, String name, Integer age) {
+  public void updateDog(Integer id, String name, Integer age) {
     for (Dog dog : dogs) {
       if (id.equals(dog.getId())) {
         if (StringUtils.isNotBlank(name)) {
