@@ -1,5 +1,6 @@
 package nz.co.automation.rest.service;
 
+import com.google.common.collect.Sets;
 import nz.co.automation.rest.dao.DogsRepository;
 import nz.co.automation.rest.domain.Dog;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class DogRestServiceJpa implements DogRestService {
@@ -22,9 +21,8 @@ public class DogRestServiceJpa implements DogRestService {
 
   @Override
   public Set<Dog> getDogs() {
-    final Iterable<Dog> iterable = dogsRepository.findAll(new Sort(Sort.Direction.ASC, "id"));
-    return StreamSupport.stream(iterable.spliterator(), false)
-            .collect(Collectors.toSet());
+    final Iterable<Dog> dogs = dogsRepository.findAll(new Sort(Sort.Direction.ASC, "id"));
+    return Sets.newLinkedHashSet(dogs);
   }
 
   @Override

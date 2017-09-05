@@ -4,6 +4,7 @@ import nz.co.automation.rest.domain.*;
 import nz.co.automation.rest.service.DogRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -32,7 +33,7 @@ public class DogRestController {
   }
 
   @RequestMapping(method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
-  public CreateDogResponse createDog(@RequestBody CreateDogRequest createDogRequest) {
+  public CreateDogResponse createDog(@Validated @RequestBody CreateDogRequest createDogRequest) {
     final String name = createDogRequest.getName();
     final Integer age = createDogRequest.getAge();
     final Dog dog = dogRestService.createDog(name, age);
