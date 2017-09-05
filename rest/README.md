@@ -131,5 +131,15 @@ psql -d automation_db -U automation
  ```
    
    
+# Building docker image
+
+* From the project base dir
+> `docker build -t automation-postgres ./src/main/resources/docker`
+
+* Run the image
+> `docker run -p 5430:5432 -d automation-postgres`
+
+
+
    
  
