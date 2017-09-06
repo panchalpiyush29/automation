@@ -1,7 +1,7 @@
 package nz.co.automation.rest.annotation.hibernate.constraint;
 
 import nz.co.automation.rest.annotation.NoSpecialCharacters;
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -18,7 +18,7 @@ public class NoSpecialCharactersConstraint implements ConstraintValidator<NoSpec
   @Override
   public void initialize(NoSpecialCharacters noSpecialCharacters) {
     specialCharacters = noSpecialCharacters.value().length == 0 ? SPECIAL_CHARACTERS : noSpecialCharacters.value();
-    specialCharactersPrint = Arrays.stream(specialCharacters).reduce("", (a, b) -> StringEscapeUtils.escapeJava(a) + StringEscapeUtils.escapeJava(b));
+    specialCharactersPrint = StringUtils.join(specialCharacters, ", ");
   }
 
   @Override

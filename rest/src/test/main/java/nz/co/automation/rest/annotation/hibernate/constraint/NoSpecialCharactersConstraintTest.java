@@ -25,6 +25,18 @@ public class NoSpecialCharactersConstraintTest {
   @Test
   public void isValid() throws Exception {
     // given
+    CreateDogRequest createDogRequest = new CreateDogRequest("a dog", 2);
+
+    // when
+    final Set<ConstraintViolation<CreateDogRequest>> constraintViolations = validator.validate(createDogRequest);
+
+    // then
+    assertThat(constraintViolations).isEmpty();
+  }
+
+  @Test
+  public void isNotValid() throws Exception {
+    // given
     CreateDogRequest createDogRequest = new CreateDogRequest("! dog", 2);
 
     // when
@@ -35,4 +47,28 @@ public class NoSpecialCharactersConstraintTest {
     assertThat(constraintViolationList.get(0).getMessage()).isNotBlank();
   }
 
+  @Test
+  public void isValidWithSpecifiedValue() {
+    // given
+    final DummyModel dummyModel = new DummyModel("c dog");
+
+    // when
+    final Set<ConstraintViolation<DummyModel>> constraintViolations = validator.validate(dummyModel);
+
+    // then
+    assertThat(constraintViolations).isEmpty();
+  }
+
+  @Test
+  public void isNotValidWithSpecifiedValue() {
+    // given
+    final DummyModel dummyModel = new DummyModel("a dog");
+
+    // when
+    final Set<ConstraintViolation<DummyModel>> constraintViolations = validator.validate(dummyModel);
+
+    // then
+    final ArrayList<ConstraintViolation<DummyModel>> constraintViolationList = Lists.newArrayList(constraintViolations);
+    assertThat(constraintViolationList.get(0).getMessage()).isNotBlank();
+  }
 }
