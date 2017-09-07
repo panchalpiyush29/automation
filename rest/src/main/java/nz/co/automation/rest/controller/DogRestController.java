@@ -1,7 +1,7 @@
 package nz.co.automation.rest.controller;
 
 import nz.co.automation.rest.annotation.aspectj.JwtVerify;
-import nz.co.automation.rest.annotation.beanpostprocessor.AutocreateLog;
+import nz.co.automation.rest.annotation.beanpostprocessor.Log;
 import nz.co.automation.rest.domain.*;
 import nz.co.automation.rest.service.DogRestService;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/api/v1/dogs")
 public class DogRestController {
 
-  @AutocreateLog
+  @Log
   private static Logger logger;
 
   private DogRestService dogRestService;

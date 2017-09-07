@@ -23,7 +23,7 @@ public class LogCreator implements BeanPostProcessor {
       public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
         // make the field accessible if defined private
         ReflectionUtils.makeAccessible(field);
-        if (field.getAnnotation(AutocreateLog.class) != null) {
+        if (field.getAnnotation(Log.class) != null) {
           Logger log = LoggerFactory.getLogger(bean.getClass());
           field.set(bean, log);
         }
