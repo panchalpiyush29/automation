@@ -14,23 +14,23 @@ import static com.google.common.base.Predicates.or;
 public class SwaggerConfiguration {
 
   @Bean
-  public Docket allDocumentation() {
+  public Docket restDocumentation() {
     return new Docket(DocumentationType.SWAGGER_2)
-            .groupName("all")
+            .groupName("rest")
             .apiInfo(apiInfo())
             .select()
+            .paths(or(PathSelectors.regex(".*/api/v1/.*")))
             .build()
             .useDefaultResponseMessages(false)
             .forCodeGeneration(true);
   }
 
   @Bean
-  public Docket publicDocumentation() {
+  public Docket allDocumentation() {
     return new Docket(DocumentationType.SWAGGER_2)
-            .groupName("dogs")
+            .groupName("all")
             .apiInfo(apiInfo())
             .select()
-            .paths(or(PathSelectors.regex(".*/dogs.*")))
             .build()
             .useDefaultResponseMessages(false)
             .forCodeGeneration(true);
