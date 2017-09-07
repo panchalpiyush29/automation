@@ -1,8 +1,10 @@
 package nz.co.automation.rest.controller;
 
 import nz.co.automation.rest.annotation.aspectj.JwtVerify;
+import nz.co.automation.rest.annotation.beanpostprocessor.AutocreateLog;
 import nz.co.automation.rest.domain.*;
 import nz.co.automation.rest.service.DogRestService;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +18,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/api/v1/dogs")
 public class DogRestController {
 
+  @AutocreateLog
+  private static Logger logger;
+
   private DogRestService dogRestService;
 
   @Autowired
@@ -25,6 +30,7 @@ public class DogRestController {
 
   @RequestMapping(method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
   public Set<Dog> getDogs() {
+    logger.info("Get a list of dogs!");
     return dogRestService.getDogs();
   }
 
