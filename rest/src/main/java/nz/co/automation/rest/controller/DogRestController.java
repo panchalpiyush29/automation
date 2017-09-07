@@ -42,7 +42,8 @@ public class DogRestController {
   }
 
   @RequestMapping(path = "{id}", method = RequestMethod.PUT, produces = APPLICATION_JSON_VALUE)
-  public UpdateDogResponse updateDog(@PathVariable("id") Integer id, @RequestBody UpdateDogRequest updateDogRequest) {
+  @JwtVerify
+  public UpdateDogResponse updateDog(@PathVariable("id") Integer id, @RequestBody UpdateDogRequest updateDogRequest, @RequestHeader(value = "Authorization", required = false) String authorization) {
     final String name = updateDogRequest.getName();
     final Integer age = updateDogRequest.getAge();
     dogRestService.updateDog(id, name, age);

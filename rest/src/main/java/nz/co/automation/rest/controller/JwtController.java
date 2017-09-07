@@ -2,14 +2,13 @@ package nz.co.automation.rest.controller;
 
 import nz.co.automation.rest.authenticator.Authenticator;
 import nz.co.automation.rest.domain.LoginDetails;
+import nz.co.automation.rest.exception.JwtInvalidTokenException;
 import nz.co.automation.rest.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.IOException;
 
 import static org.springframework.http.MediaType.TEXT_PLAIN_VALUE;
 
@@ -33,7 +32,7 @@ public class JwtController {
   }
 
   @RequestMapping(path = "parse", method = RequestMethod.POST, produces = TEXT_PLAIN_VALUE)
-  public String parse(String token) throws IOException {
+  public String parse(String token) throws JwtInvalidTokenException {
     return jwtService.parse(token);
   }
 
