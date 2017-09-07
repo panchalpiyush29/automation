@@ -1,6 +1,6 @@
 package nz.co.automation.rest.annotation;
 
-import nz.co.automation.rest.annotation.hibernate.constraint.NoSpecialCharactersConstraint;
+import nz.co.automation.rest.annotation.hibernate.NoSpecialCharactersConstraint;
 import org.springframework.core.annotation.AliasFor;
 
 import javax.validation.Constraint;

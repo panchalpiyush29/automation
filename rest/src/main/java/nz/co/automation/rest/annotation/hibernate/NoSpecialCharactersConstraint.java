@@ -1,4 +1,4 @@
-package nz.co.automation.rest.annotation.hibernate.constraint;
+package nz.co.automation.rest.annotation.hibernate;
 
 import nz.co.automation.rest.annotation.NoSpecialCharacters;
 import org.apache.commons.lang3.StringUtils;

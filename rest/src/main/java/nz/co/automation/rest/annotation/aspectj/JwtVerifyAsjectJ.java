@@ -1,4 +1,4 @@
-package nz.co.automation.rest.annotation.aspectj.pointcut;
+package nz.co.automation.rest.annotation.aspectj;
 
 import nz.co.automation.rest.exception.UnauthorizedAccessException;
 import nz.co.automation.rest.service.JwtService;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Aspect
 @Component
-public class JwtVerifyPointCut {
+public class JwtVerifyAsjectJ {
 
   private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -23,7 +23,7 @@ public class JwtVerifyPointCut {
   private final JwtService jwtService;
 
   @Autowired
-  public JwtVerifyPointCut(HttpServletRequest httpServletRequest, JwtService jwtService) {
+  public JwtVerifyAsjectJ(HttpServletRequest httpServletRequest, JwtService jwtService) {
     this.httpServletRequest = httpServletRequest;
     this.jwtService = jwtService;
   }
