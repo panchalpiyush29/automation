@@ -1,5 +1,6 @@
 package nz.co.automation.rest.controller;
 
+import nz.co.automation.rest.annotation.aspectj.JwtVerify;
 import nz.co.automation.rest.domain.*;
 import nz.co.automation.rest.service.DogRestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,8 @@ public class DogRestController {
   }
 
   @RequestMapping(path = "{id}", method = RequestMethod.DELETE, produces = APPLICATION_JSON_VALUE)
-  public DeleteDogResponse delete(@PathVariable("id") Integer id) {
+  @JwtVerify
+  public DeleteDogResponse delete(@PathVariable("id") Integer id, @RequestHeader(value = "Authorization", required = false) String authorization) {
     dogRestService.deleteDog(id);
     return new DeleteDogResponse(RestStatus.SUCCESS, id);
   }
