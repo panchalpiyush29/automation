@@ -62,4 +62,8 @@ public class DogRestController {
     dogRestService.deleteDog(id);
     return new DeleteDogResponse(RestStatus.SUCCESS, id);
   }
+
+  public void printHelloWorld() {
+    logger.info("test");
+  }
 }
