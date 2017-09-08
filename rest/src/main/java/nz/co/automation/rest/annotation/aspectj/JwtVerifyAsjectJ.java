@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,11 @@ public class JwtVerifyAsjectJ {
     this.jwtService = jwtService;
   }
 
+
   @Before("@annotation(nz.co.automation.rest.annotation.aspectj.JwtVerify)")
   public void before(JoinPoint joinPoint) throws Throwable {
-    final String authorization = httpServletRequest.getHeader("Authorization");
+    final String authorization = getAuthorizationHeader(joinPoint);
+
     if (StringUtils.isBlank(authorization)) {
       throw new UnauthorizedAccessException("Unauthorised to invoke this call!");
     }
@@ -47,5 +50,17 @@ public class JwtVerifyAsjectJ {
     final String payload = jwtService.parse(authorizationToken);
 
     logger.info("Authorization Type: {}, Jwt Payload: {}", authorizationType, payload);
+  }
+
+  private String getAuthorizationHeader(JoinPoint joinPoint) {
+    final MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+    final String[] parameterNames = signature.getParameterNames();
+    for (int i = 0; i < parameterNames.length; i++) {
+      if ("Authorization".equalsIgnoreCase(parameterNames[i])) {
+        return joinPoint.getArgs()[i].toString();
+      }
+    }
+
+    return httpServletRequest.getHeader("Authorization");
   }
 }
