@@ -1,5 +1,6 @@
 package nz.co.automation.rest.service;
 
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
 import nz.co.automation.rest.dao.DogsRepository;
 import nz.co.automation.rest.domain.Dog;
@@ -21,7 +22,7 @@ public class DogRestServiceJpa implements DogRestService {
 
   @Override
   public Set<Dog> getDogs() {
-    final Iterable<Dog> dogs = dogsRepository.findAll(new Sort(Sort.Direction.ASC, "id"));
+    final Iterable<Dog> dogs = dogsRepository.findAll(new Sort(Sort.Direction.ASC, "name"));
     return Sets.newLinkedHashSet(dogs);
   }
 
