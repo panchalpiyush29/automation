@@ -1,11 +1,8 @@
 package nz.co.automation.regression.steps;
 
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import nz.co.automation.regression.domain.Login;
-import nz.co.automation.regression.domain.LoginHolder;
 import nz.co.automation.regression.domain.Query;
 import nz.co.automation.regression.domain.QueryHolder;
 import nz.co.automation.regression.io.ModelFactory;
@@ -34,7 +31,7 @@ public class GoogleSteps {
 
     @Given("^I am on google page$")
     public void iAmOnGooglePage() {
-        browser.open("http://www.google.co.nz");
+        browser.visit();
     }
 
     @Given("^I have a \"([^\"]*)\" search query$")
@@ -52,11 +49,5 @@ public class GoogleSteps {
     @Then("^I should see the correct result$")
     public void iShouldSeeTheCorrectResult() {
         assertThat(googleHomePage.hasResults()).isTrue();
-    }
-
-    @And("^I am on gmail login page$")
-    public void iAmOnGmailLoginPage() throws Throwable {
-        googleHomePage.navigateToGmail();
-
     }
 }
