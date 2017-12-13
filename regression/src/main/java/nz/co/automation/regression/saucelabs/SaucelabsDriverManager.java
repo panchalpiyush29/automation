@@ -36,7 +36,7 @@ public class SaucelabsDriverManager {
   private RemoteWebDriver createSaucelabsDriver() throws MalformedURLException {
 
     // browser capabilities
-    final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+    final DesiredCapabilities capabilities = DesiredCapabilities.firefox();
     capabilities.setCapability("screenResolution", saucelabsProperties.getAutomationResolution());
     capabilities.setCapability("tunnel-identifier", saucelabsProperties.getAutomationTunnel());
     capabilities.setCapability("platform", saucelabsProperties.getAutomationPlatform());

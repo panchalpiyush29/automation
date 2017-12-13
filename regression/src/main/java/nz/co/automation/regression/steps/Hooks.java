@@ -27,59 +27,61 @@ import static org.openqa.selenium.OutputType.BYTES;
 @SpringBootTest
 public class Hooks {
 
-  private final Environment environment;
-  private final SaucelabsDriverManager saucelabsDriverManager;
-  private final SaucelabsClient saucelabsClient;
-  private final ReportBuilder reportBuilder;
+    private final Environment environment;
+    private final SaucelabsDriverManager saucelabsDriverManager;
+    private final SaucelabsClient saucelabsClient;
+    private final ReportBuilder reportBuilder;
 
-  @Autowired
-  public Hooks(Environment environment, SaucelabsDriverManager saucelabsDriverManager, SaucelabsClient saucelabsClient, ReportBuilder reportBuilder) {
-    this.environment = environment;
-    this.saucelabsDriverManager = saucelabsDriverManager;
-    this.saucelabsClient = saucelabsClient;
-    this.reportBuilder = reportBuilder;
-  }
-
-  @BeforeAll
-  public void beforeAllScenarios() {
-    System.out.println("-------------- executing BeforeAll hook ----------------\n");
-  }
-
-  @Before
-  public void beforeScenario() {
-    if (isSaucelabsEnabled()) {
-      WebDriverRunner.setWebDriver(saucelabsDriverManager.getSauceLabsDriver());
+    @Autowired
+    public Hooks(Environment environment, SaucelabsDriverManager saucelabsDriverManager, SaucelabsClient saucelabsClient, ReportBuilder reportBuilder) {
+        this.environment = environment;
+        this.saucelabsDriverManager = saucelabsDriverManager;
+        this.saucelabsClient = saucelabsClient;
+        this.reportBuilder = reportBuilder;
     }
-  }
 
-  @After
-  public void afterScenario(Scenario scenario) {
-    try {
-      if (isSaucelabsEnabled()) {
-        saucelabsClient.updateCurrentJob(scenario);
-      }
-
-      if (scenario.isFailed()) {
-        final TakesScreenshot takesScreenshot = (TakesScreenshot) WebDriverRunner.getWebDriver();
-        final byte[] screenshot = takesScreenshot.getScreenshotAs(BYTES);
-        scenario.embed(screenshot, "image/png");
-      }
-    } finally {
-      if (isSaucelabsEnabled()) {
-        close();
-      }
+    @BeforeAll
+    public void beforeAllScenarios() {
+        System.out.println("-------------- executing BeforeAll hook ----------------\n");
     }
-  }
 
-  @AfterAll
-  public void afterAllScenarios() {
-    System.out.println("-------------- executing AfterAll hook ----------------\n");
-    reportBuilder.generateReports();
-  }
+    @Before
+    public void beforeScenario() {
+        if (isSaucelabsEnabled()) {
+            WebDriverRunner.setWebDriver(saucelabsDriverManager.getSauceLabsDriver());
+        }
+        //WebDriverRunner.setWebDriver(WebDriverRunner.getWebDriver());
+    }
 
-  private boolean isSaucelabsEnabled() {
-    final String property = environment.getProperty("saucelabs.enabled");
-    return StringUtils.isNotBlank(property) && property.equals("true");
-  }
+    @After
+    public void afterScenario(Scenario scenario) {
+        try {
+            if (isSaucelabsEnabled()) {
+                saucelabsClient.updateCurrentJob(scenario);
+            }
+
+            if (scenario.isFailed()) {
+                final TakesScreenshot takesScreenshot = (TakesScreenshot) WebDriverRunner.getWebDriver();
+                final byte[] screenshot = takesScreenshot.getScreenshotAs(BYTES);
+                scenario.embed(screenshot, "image/png");
+            }
+        } finally {
+            if (isSaucelabsEnabled()) {
+                close();
+            }
+        }
+    }
+
+    @AfterAll
+    public void afterAllScenarios() {
+        System.out.println("-------------- executing AfterAll hook ----------------\n");
+        reportBuilder.generateReports();
+        WebDriverRunner.closeWebDriver();
+    }
+
+    private boolean isSaucelabsEnabled() {
+        final String property = environment.getProperty("saucelabs.enabled");
+        return StringUtils.isNotBlank(property) && property.equals("true");
+    }
 
 }

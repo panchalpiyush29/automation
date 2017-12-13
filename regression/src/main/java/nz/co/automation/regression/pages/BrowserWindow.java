@@ -13,16 +13,18 @@ import java.util.List;
 public class BrowserWindow {
 
   private final String baseUrl;
-  private final WebDriver webDriver;
 
   @Autowired
   public BrowserWindow() {
     this.baseUrl = "http://www.google.co.nz";
-    this.webDriver = WebDriverRunner.getWebDriver();
   }
 
   public void scrollToTop() {
-    ((JavascriptExecutor) webDriver).executeScript("window.scrollTo(0, 0)");
+    ((JavascriptExecutor) getWebDriver()).executeScript("window.scrollTo(0, 0)");
+  }
+
+  private WebDriver getWebDriver() {
+    return WebDriverRunner.getWebDriver();
   }
 
   public String getFirstTabName() {
@@ -40,11 +42,11 @@ public class BrowserWindow {
   }
 
   public String getCurrentTabUrl() {
-    return webDriver.getCurrentUrl();
+    return getWebDriver().getCurrentUrl();
   }
 
   public String getNextTabUrl() {
-    final String currentTabName = webDriver.getWindowHandle();
+    final String currentTabName = getWebDriver().getWindowHandle();
     final List<String> tabNames = getTabNames();
     final int size = tabNames.size();
     for (int i = 0; i < size; i++) {
@@ -56,7 +58,7 @@ public class BrowserWindow {
         // get next tab url
         final String nextTabName = tabNames.get(i + 1);
         focusTab(nextTabName);
-        final String nextTabUrl = webDriver.getCurrentUrl();
+        final String nextTabUrl = getWebDriver().getCurrentUrl();
 
         // switch back to current
         focusTab(currentTabName);
@@ -68,28 +70,28 @@ public class BrowserWindow {
   }
 
   private List<String> getTabNames() {
-    return new ArrayList(webDriver.getWindowHandles());
+    return new ArrayList(getWebDriver().getWindowHandles());
   }
 
   private void closeTab(String tabName) {
     focusTab(tabName);
-    webDriver.close();
+    getWebDriver().close();
   }
 
   private void focusTab(String tabName) {
-    webDriver.switchTo().window(tabName);
+    getWebDriver().switchTo().window(tabName);
   }
 
   public void navigateTo(Object path) {
-    webDriver.get(baseUrl + "/" + path);
+    getWebDriver().get(baseUrl + "/" + path);
   }
 
   public void clearSessionStorage() {
-    ((JavascriptExecutor) webDriver).executeScript("sessionStorage.clear();");
-    webDriver.manage().deleteAllCookies();
+    ((JavascriptExecutor) getWebDriver()).executeScript("sessionStorage.clear();");
+    getWebDriver().manage().deleteAllCookies();
   }
 
   public void navigateBack() {
-    webDriver.navigate().back();
+    getWebDriver().navigate().back();
   }
 }
