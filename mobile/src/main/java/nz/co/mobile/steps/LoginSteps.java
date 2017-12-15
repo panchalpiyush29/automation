@@ -1,5 +1,6 @@
 package nz.co.mobile.steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -30,15 +31,16 @@ public class LoginSteps extends BaseSteps {
     }
 
     @When("^I login as the user$")
-    public void iLoginAsTheUser() {
+    public void iLoginAsTheUser() throws InterruptedException {
         UserDetails userDetails = userDetailsHolder.get();
+        loginScreen.dismissNotification();
         loginScreen.enterEmail(userDetails.getEmail());
         loginScreen.enterPassword(userDetails.getPassword());
         loginScreen.clickSignIn();
     }
 
     @Then("^I can see the welcome page after skipping the welcome video$")
-    public void iCanSeeTheWelcomePageAfterSkippingTheWelcomeVideo() {
+    public void iCanSeeTheWelcomePageAfterSkippingTheWelcomeVideo() throws InterruptedException {
         loginScreen.dismissNotification();
         assertThat(loginScreen.isDisplayingTheWelcomeToSparkMessage()).isTrue();
     }
@@ -47,5 +49,10 @@ public class LoginSteps extends BaseSteps {
     public void iNavigateToTheSetUpAccessCardSection() {
         loginScreen.navigateToTheToDoSection();
         loginScreen.navigateToTheSetUpCard();
+    }
+
+    @Then("^I can see a login successful message$")
+    public void iCanSeeALoginSuccessfulMessage() throws Throwable {
+     assertThat(loginScreen.loginSuccessMsgIsDisplayed()).isTrue();
     }
 }

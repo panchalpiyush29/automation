@@ -22,17 +22,17 @@ public class AppiumConfiguration {
 
         // appium capabilities
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability("deviceName", "Nexus_5_API_22");
+        desiredCapabilities.setCapability("deviceName", "Pixel_XL_API_22");
         desiredCapabilities.setCapability("platform", "Android");
-        desiredCapabilities.setCapability("app", "com.facebook.lite");
-        desiredCapabilities.setCapability("appPackage", "com.facebook.lite");
-        desiredCapabilities.setCapability("appActivity", ".MainActivity");
+        desiredCapabilities.setCapability("app", "net.piyushpanchal.loginapp");
+        desiredCapabilities.setCapability("appPackage", "net.piyushpanchal.loginapp");
+        desiredCapabilities.setCapability("appActivity", ".LoginActivity");
 
         // appium
         AppiumDriver driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
 
         // configure appium
-        driver.manage().timeouts().implicitlyWait(5L, TimeUnit.MINUTES);
+        driver.manage().timeouts().implicitlyWait(30L, TimeUnit.SECONDS);
 
         return driver;
     }

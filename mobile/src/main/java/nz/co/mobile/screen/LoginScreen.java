@@ -13,11 +13,12 @@ public class LoginScreen {
 
     private static final String DISMISS_DIALOG = "button2";
     private static final String WELCOME_TO_SPARK_TOOLBAR = "toolbar";
-    private static final String ID_LOGIN_EMAIL = "email_address";
+    private static final String ID_LOGIN_EMAIL = "email";
     private static final String ID_LOGIN_PASSWORD = "password";
     private static final String ID_SIGN_IN_BUTTON = "email_sign_in_button";
     private static final String TO_DO = "TO DO";
     private static final String SET_UP_ACCESS_CARD = "Set Up Access Card";
+    private static final String ID_OK = "button3";
 
     private final AppiumDriver appiumDriver;
     private final AppScreen appScreen;
@@ -46,8 +47,10 @@ public class LoginScreen {
         appiumDriver.findElement(By.id(ID_SIGN_IN_BUTTON)).click();
     }
 
-    public void dismissNotification() {
-        appiumDriver.findElement(By.id(DISMISS_DIALOG)).click();
+    public void dismissNotification() throws InterruptedException {
+        while (appiumDriver.findElements(By.xpath("//*[@class='android.widget.Button'][2]")).size() > 0) {
+            appiumDriver.findElement(By.xpath("//*[@class='android.widget.Button'][2]")).click();
+        }
     }
 
     public boolean isDisplayingTheWelcomeToSparkMessage() {
@@ -79,5 +82,9 @@ public class LoginScreen {
                 findFirst().
                 get();
         cardTile.click();
+    }
+
+    public boolean loginSuccessMsgIsDisplayed() {
+        return appiumDriver.findElement(By.id(ID_OK)).isDisplayed();
     }
 }
