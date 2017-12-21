@@ -13,3 +13,11 @@ e.g. `-Dspring.profiles.active=local -Dselenide.browser=chrome -Dwebdriver.chrom
 or with saucelab 
 
 `mvn -Dit.test=CucumberRunner -Dcucumber.options="--tags @google" -Dsaucelabs.enabled=true verify`
+
+# Mobile
+1) mobile (for android) and mobileIOS (for iOS) are two different modules for mobile automation
+2) android .apk file is embedded in the mobile project (under resources), To run the test create a android phone simulator 
+   via Android Studio copy down the name of the simulator and replace the same in AppiumConfigurator (field = deviceName)
+3) To run the test on iOS is a little different so under the resource (app)folder there is a zip file copy and paste on your system (and unzip)
+   On AppiumConfigurator file modify udid, deviceName, app (specifying the path of the downloaded file) 
+  

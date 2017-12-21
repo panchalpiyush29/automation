@@ -33,22 +33,11 @@ public class LoginSteps extends BaseSteps {
     @When("^I login as the user$")
     public void iLoginAsTheUser() throws InterruptedException {
         UserDetails userDetails = userDetailsHolder.get();
+        //If you get a dismiss pop-up on your mobile please uncomment below code
         //loginScreen.dismissNotification();
         loginScreen.enterEmail(userDetails.getEmail());
         loginScreen.enterPassword(userDetails.getPassword());
         loginScreen.clickSignIn();
-    }
-
-    @Then("^I can see the welcome page after skipping the welcome video$")
-    public void iCanSeeTheWelcomePageAfterSkippingTheWelcomeVideo() throws InterruptedException {
-        loginScreen.dismissNotification();
-        assertThat(loginScreen.isDisplayingTheWelcomeToSparkMessage()).isTrue();
-    }
-
-    @Given("^I navigate to the set up access card section$")
-    public void iNavigateToTheSetUpAccessCardSection() {
-        loginScreen.navigateToTheToDoSection();
-        loginScreen.navigateToTheSetUpCard();
     }
 
     @Then("^I can see a login successful message$")
