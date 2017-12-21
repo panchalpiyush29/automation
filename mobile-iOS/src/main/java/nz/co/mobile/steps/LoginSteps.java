@@ -1,6 +1,5 @@
 package nz.co.mobile.steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -47,12 +46,12 @@ public class LoginSteps extends BaseSteps {
 
     @Given("^I navigate to the set up access card section$")
     public void iNavigateToTheSetUpAccessCardSection() {
-        loginScreen.navigateToTheToDoSection();
+
         loginScreen.navigateToTheSetUpCard();
     }
 
     @Then("^I can see a login successful message$")
     public void iCanSeeALoginSuccessfulMessage() throws Throwable {
-     assertThat(loginScreen.loginSuccessMsgIsDisplayed()).isTrue();
+        assertThat(loginScreen.loginSuccessMsgIsDisplayed()).isTrue();
     }
 }
