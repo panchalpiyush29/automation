@@ -2,7 +2,10 @@ package nz.co.mobile.appium;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSDriver;
+import nz.co.mobile.steps.BaseSteps;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -14,21 +17,47 @@ import java.util.concurrent.TimeUnit;
 import static org.springframework.context.annotation.ScopedProxyMode.TARGET_CLASS;
 
 @Configuration
-public class AppiumConfiguration {
+public class AppiumConfiguration extends BaseSteps {
+
+    private final String udid;
+    private final String platform;
+    private final String platformVersion;
+    private final String deviceName;
+    private final String automationName;
+    private final String app;
+    private final String bundleId;
+
+    @Autowired
+    public AppiumConfiguration(
+            @Value("${udid}") String udid,
+            @Value("${platform}") String platform,
+            @Value("${platformVersion}") String platformVersion,
+            @Value("${deviceName}") String deviceName,
+            @Value("${automationName}") String automationName,
+            @Value("${app}") String app,
+            @Value("${bundleId}") String bundleId) {
+        this.udid = udid;
+        this.platform = platform;
+        this.platformVersion = platformVersion;
+        this.deviceName = deviceName;
+        this.automationName = automationName;
+        this.app = app;
+        this.bundleId = bundleId;
+    }
 
     @Bean(destroyMethod = "quit")
     @Scope(scopeName = "cucumber-glue", proxyMode = TARGET_CLASS)
     public AppiumDriver appiumDriver() throws MalformedURLException {
 
-        // appium capabilities
+        // Appium capabilities, update the value in application.properties as per your app path and emulator name
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability("udid", "F53187ED-0068-4D64-BBAC-8A57598ED025");
-        desiredCapabilities.setCapability("platform", "iOS");
-        desiredCapabilities.setCapability("platformVersion", "11.2");
-        desiredCapabilities.setCapability("deviceName", "iPhone 8 Plus");
-        desiredCapabilities.setCapability("automationName", "XCUITest");
-        desiredCapabilities.setCapability("app", "/Users/piyushpanchal/Desktop/login-app.app");
-        desiredCapabilities.setCapability("bundleId", "co.nz.simpleApp.login-app");
+        desiredCapabilities.setCapability("udid", udid);
+        desiredCapabilities.setCapability("platform", platform);
+        desiredCapabilities.setCapability("platformVersion", platformVersion);
+        desiredCapabilities.setCapability("deviceName", deviceName);
+        desiredCapabilities.setCapability("automationName", automationName);
+        desiredCapabilities.setCapability("app", app);
+        desiredCapabilities.setCapability("bundleId", bundleId);
 
         // appium
         AppiumDriver driver = new IOSDriver(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
