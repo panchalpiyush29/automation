@@ -1,7 +1,6 @@
 package nz.co.mobile.screen;
 
 import io.appium.java_client.AppiumDriver;
-import nz.co.mobile.appium.AppScreen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +20,11 @@ public class LoginScreen {
     private static final String ID_OK = "button3";
 
     private final AppiumDriver appiumDriver;
-    private final AppScreen appScreen;
+
 
     @Autowired
-    public LoginScreen(AppiumDriver appiumDriver, AppScreen appScreen) {
+    public LoginScreen(AppiumDriver appiumDriver) {
         this.appiumDriver = appiumDriver;
-        this.appScreen = appScreen;
     }
 
 
@@ -58,7 +56,7 @@ public class LoginScreen {
     }
 
     public void navigateToTheToDoSection() {
-        appScreen.scrollDown();
+
         selectCardTile(TO_DO);
     }
 

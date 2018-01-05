@@ -22,7 +22,7 @@ public class AppiumConfiguration {
 
         // appium capabilities
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability("deviceName", "Nexus_6_API_22");
+        desiredCapabilities.setCapability("deviceName", "Pixel_XL_API_22");
         desiredCapabilities.setCapability("platform", "Android");
         desiredCapabilities.setCapability("app", "net.piyushpanchal.loginapp");
         desiredCapabilities.setCapability("appPackage", "net.piyushpanchal.loginapp");
@@ -32,7 +32,7 @@ public class AppiumConfiguration {
         AppiumDriver driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
 
         // configure appium
-        driver.manage().timeouts().implicitlyWait(30L, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(15L, TimeUnit.SECONDS);
 
         return driver;
     }

@@ -38,18 +38,6 @@ public class LoginSteps extends BaseSteps {
         loginScreen.clickSignIn();
     }
 
-    @Then("^I can see the welcome page after skipping the welcome video$")
-    public void iCanSeeTheWelcomePageAfterSkippingTheWelcomeVideo() throws InterruptedException {
-        loginScreen.dismissNotification();
-        assertThat(loginScreen.isDisplayingTheWelcomeToSparkMessage()).isTrue();
-    }
-
-    @Given("^I navigate to the set up access card section$")
-    public void iNavigateToTheSetUpAccessCardSection() {
-
-        loginScreen.navigateToTheSetUpCard();
-    }
-
     @Then("^I can see a login successful message$")
     public void iCanSeeALoginSuccessfulMessage() throws Throwable {
         assertThat(loginScreen.loginSuccessMsgIsDisplayed()).isTrue();

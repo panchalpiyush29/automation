@@ -34,7 +34,7 @@ public class LoginSteps extends BaseSteps {
     public void iLoginAsTheUser() throws InterruptedException {
         UserDetails userDetails = userDetailsHolder.get();
         //If you get a dismiss pop-up on your mobile please uncomment below code
-        //loginScreen.dismissNotification();
+        loginScreen.dismissNotification();
         loginScreen.enterEmail(userDetails.getEmail());
         loginScreen.enterPassword(userDetails.getPassword());
         loginScreen.clickSignIn();
