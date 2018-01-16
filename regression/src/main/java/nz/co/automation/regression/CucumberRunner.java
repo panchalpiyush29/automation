@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
             "html:target/cucumber-html-report",
             "json:target/cucumber-json-report.json",
             "junit:target/cucumber-junit.xml"},
-        tags = {"~@wip", "@google"},
+        tags = {"~@wip", "@api-weather"},
         features = {"src/main/resources/features"}
 )
 public class CucumberRunner {
