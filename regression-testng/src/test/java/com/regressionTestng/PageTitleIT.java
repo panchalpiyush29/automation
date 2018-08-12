@@ -3,12 +3,11 @@ package com.regressionTestng;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-public class PageTitleTest {
+public class PageTitleIT extends DriverBase {
 
     //Expected Result
     private ExpectedCondition<Boolean> pageTitleStartsWith(final String searchString) {
@@ -17,7 +16,7 @@ public class PageTitleTest {
 
     //Test Step
     private void googleExampleThatSearchesFor(final String searchString) {
-        WebDriver driver = new FirefoxDriver();
+        WebDriver driver = DriverBase.getDriver();
 
         driver.get("http://www.google.com");
 
@@ -34,17 +33,26 @@ public class PageTitleTest {
         wait.until(pageTitleStartsWith(searchString));
 
         System.out.println("Page title is: " + driver.getTitle());
-
-        driver.quit();
     }
 
+    //Test Data
     @Test
     public void googleCheeseExample() {
         googleExampleThatSearchesFor("Cheese");
     }
 
     @Test
-    public void googleMilkExample() {
-        googleExampleThatSearchesFor("Milk");
+    public void googleAppleExample() {
+        googleExampleThatSearchesFor("Apple");
+    }
+
+    @Test
+    public void googleGoogleExample() {
+        googleExampleThatSearchesFor("Google");
+    }
+
+    @Test
+    public void googleCricketExample() {
+        googleExampleThatSearchesFor("Cricket");
     }
 }
