@@ -19,7 +19,7 @@
         <java.version>1.8</java.version>
         <cucumber.version>1.2.5</cucumber.version>
         <powermock.version>1.6.6</powermock.version>
-        <selenium.version>3.5.3</selenium.version>
+        <selenium.version>3.14.0</selenium.version>
     </properties>
 
     <profiles>
@@ -84,7 +84,7 @@
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
-            <version>4.7</version>
+            <version>4.12.0</version>
         </dependency>
 
         <!-- Random -->
@@ -98,7 +98,7 @@
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-reporting</artifactId>
-            <version>3.10.0</version>
+            <version>3.19.0</version>
         </dependency>
 
         <!-- Powermock -->
