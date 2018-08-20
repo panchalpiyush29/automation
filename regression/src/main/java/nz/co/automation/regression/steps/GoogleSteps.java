@@ -31,7 +31,7 @@ public class GoogleSteps {
 
     @Given("^I am on google page$")
     public void iAmOnGooglePage() {
-        browser.visit();
+        browser.visitBaseUrl();
     }
 
     @Given("^I have a \"([^\"]*)\" search query$")

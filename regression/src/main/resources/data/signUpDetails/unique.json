@@ -1,0 +1,7 @@
+{
+  "firstName": "Automation",
+  "lastName": "Test",
+  "userName": "$RANDOM_VALUE$",
+  "password": "Password$1",
+  "confirmPassword": "Password$1"
+}

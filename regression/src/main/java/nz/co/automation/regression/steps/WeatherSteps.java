@@ -30,6 +30,5 @@ public class WeatherSteps {
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
         assertThat(response.getBody().contains(city)).isTrue();
     }
-
 }
 
