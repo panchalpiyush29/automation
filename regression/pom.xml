@@ -22,8 +22,8 @@
         <selenium.version>3.14.0</selenium.version>
         <profile>local</profile>
         <spring.profiles.active>local</spring.profiles.active>
-        <selenide.browser>chrome</selenide.browser>
-        <webdriver.chrome.driver>/Users/piyushpanchal/chromedriver4</webdriver.chrome.driver>
+        <selenide.browser>firefox</selenide.browser>
+        <webdriver.driver>/Users/piyushpanchal/geckodriver</webdriver.driver>
         <saucelabs.enabled>false</saucelabs.enabled>
         <cucumber.options>--tags @google</cucumber.options>
     </properties>
@@ -131,7 +131,7 @@
                     <systemPropertyVariables>
                         <spring.profiles.active>${spring.profiles.active}</spring.profiles.active>
                         <selenide.browser>${selenide.browser}</selenide.browser>
-                        <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
+                        <webdriver.driver>${webdriver.driver}</webdriver.driver>
                         <saucelabs.enabled>${saucelabs.enabled}</saucelabs.enabled>
                         <cucumber.options>${cucumber.options}</cucumber.options>
                     </systemPropertyVariables>
