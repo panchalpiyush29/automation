@@ -4,7 +4,6 @@ Feature: Google search and sign-up
   Background:
     Given I am on google page
 
-  @wip
   Scenario: Google search should return the correct result
     Given I have a "valid" search query
     When I perform a search on google landing page
