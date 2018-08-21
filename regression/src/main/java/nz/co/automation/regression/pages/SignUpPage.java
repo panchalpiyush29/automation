@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 @Component
 public class SignUpPage {
@@ -19,22 +20,20 @@ public class SignUpPage {
     private static final String NAME_CONFIRM_PASSWORD = "ConfirmPasswd";
     private static final String ID_NEXT_BUTTON = "accountDetailsNext";
     private final String googleSignUpUrl;
-    private final Browser browser;
 
     @Autowired
     public SignUpPage(
-            @Value("${google.signup.url}") String googleSignUpUrl,
-            Browser browser) {
+            @Value("${google.signup.url}") String googleSignUpUrl
+    ) {
         this.googleSignUpUrl = googleSignUpUrl;
-        this.browser = browser;
     }
 
     public void fillForm(SignUpDetails signUpDetails) {
-        browser.navigateToUrl(googleSignUpUrl);
-        fillSignInDetails(signUpDetails);
+        open(googleSignUpUrl);
+        fill(signUpDetails);
     }
 
-    private void fillSignInDetails(SignUpDetails signUpDetails) {
+    private void fill(SignUpDetails signUpDetails) {
         $(By.id(ID_FIRST_NAME)).waitUntil(Condition.visible, 5).sendKeys(signUpDetails.getFirstName());
         $(By.id(ID_LAST_NAME)).waitUntil(Condition.visible, 2).sendKeys(signUpDetails.getLastName());
         $(By.id(ID_USERNAME)).waitUntil(Condition.visible, 2).sendKeys(signUpDetails.getUserName());
