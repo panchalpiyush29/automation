@@ -18,7 +18,7 @@ public class PageTitleIT extends DriverBase {
     private void googleExampleThatSearchesFor(final String searchString) {
         WebDriver driver = DriverBase.getDriver();
 
-        driver.get("http://www.google.com");
+        driver.get("https://www.google.co.nz");
 
         WebElement searchField = driver.findElement(By.name("q"));
 
