@@ -20,12 +20,6 @@
         <cucumber.version>1.2.5</cucumber.version>
         <powermock.version>1.6.6</powermock.version>
         <selenium.version>3.14.0</selenium.version>
-        <profile>local</profile>
-        <spring.profiles.active>local</spring.profiles.active>
-        <selenide.browser>firefox</selenide.browser>
-        <webdriver.driver>/Users/piyushpanchal/geckodriver</webdriver.driver>
-        <saucelabs.enabled>false</saucelabs.enabled>
-        <cucumber.options>--tags @google</cucumber.options>
     </properties>
 
     <profiles>
@@ -128,13 +122,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
-                    <systemPropertyVariables>
-                        <spring.profiles.active>${spring.profiles.active}</spring.profiles.active>
-                        <selenide.browser>${selenide.browser}</selenide.browser>
-                        <webdriver.driver>${webdriver.driver}</webdriver.driver>
-                        <saucelabs.enabled>${saucelabs.enabled}</saucelabs.enabled>
-                        <cucumber.options>${cucumber.options}</cucumber.options>
-                    </systemPropertyVariables>
                     <testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
                 </configuration>
             </plugin>
