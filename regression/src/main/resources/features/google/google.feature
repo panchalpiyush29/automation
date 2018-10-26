@@ -7,7 +7,7 @@ Feature: Google search and sign-up
   Scenario: Google search should return the correct result
     Given I have a "valid" search query
     When I perform a search on google landing page
-    Then I should see the correct result
+    Then I should see at least 5 correct result
 
   Scenario: Sign up a google user
     Given I have a "unique" user details

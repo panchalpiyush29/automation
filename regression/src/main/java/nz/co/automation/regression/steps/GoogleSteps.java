@@ -10,6 +10,7 @@ import nz.co.automation.regression.pages.Browser;
 import nz.co.automation.regression.pages.GoogleHomePage;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.codeborne.selenide.Selenide.title;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -31,7 +32,7 @@ public class GoogleSteps {
 
     @Given("^I am on google page$")
     public void iAmOnGooglePage() {
-        browser.visitBaseUrl();
+        title().matches("Google");
     }
 
     @Given("^I have a \"([^\"]*)\" search query$")
@@ -46,8 +47,8 @@ public class GoogleSteps {
         googleHomePage.search(query);
     }
 
-    @Then("^I should see the correct result$")
-    public void iShouldSeeTheCorrectResult() {
-        assertThat(googleHomePage.hasResults()).isTrue();
+    @Then("^I should see at least (\\d+) correct result$")
+    public void iShouldSeeAtLeastCorrectResult(int resultCount) {
+        assertThat(googleHomePage.hasResults(resultCount));
     }
 }

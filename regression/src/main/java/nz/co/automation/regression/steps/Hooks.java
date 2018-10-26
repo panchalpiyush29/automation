@@ -8,6 +8,7 @@ import net.masterthought.cucumber.ReportBuilder;
 import nz.co.automation.regression.AutomationConfiguration;
 import nz.co.automation.regression.annotations.AfterAll;
 import nz.co.automation.regression.annotations.BeforeAll;
+import nz.co.automation.regression.pages.Browser;
 import nz.co.automation.regression.saucelabs.SaucelabsClient;
 import nz.co.automation.regression.saucelabs.SaucelabsDriverManager;
 import org.apache.commons.lang3.StringUtils;
@@ -31,18 +32,22 @@ public class Hooks {
     private final SaucelabsDriverManager saucelabsDriverManager;
     private final SaucelabsClient saucelabsClient;
     private final ReportBuilder reportBuilder;
+    private final Browser browser;
 
     @Autowired
-    public Hooks(Environment environment, SaucelabsDriverManager saucelabsDriverManager, SaucelabsClient saucelabsClient, ReportBuilder reportBuilder) {
+    public Hooks(Environment environment, SaucelabsDriverManager saucelabsDriverManager, SaucelabsClient saucelabsClient, ReportBuilder reportBuilder, Browser browser) {
         this.environment = environment;
         this.saucelabsDriverManager = saucelabsDriverManager;
         this.saucelabsClient = saucelabsClient;
         this.reportBuilder = reportBuilder;
+        this.browser = browser;
     }
 
     @BeforeAll
     public void beforeAllScenarios() {
         System.out.println("-------------- executing BeforeAll hook ----------------\n");
+        browser.visitBaseUrl();
+        browser.setBrowserProperties();
     }
 
     @Before

@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         format = {
             "pretty",
-            "html:target/cucumber-html-report",
             "json:target/cucumber-json-report.json",
             "junit:target/cucumber-junit.xml"},
         tags = {"~@wip", "@google"},

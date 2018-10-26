@@ -16,12 +16,11 @@ public class Browser {
         this.googleUrl = googleUrl;
     }
 
-    public void navigateToUrl(String url) {
-        Selenide.open(url);
-    }
-
     public void visitBaseUrl() {
         Selenide.open(googleUrl);
     }
 
+    public void setBrowserProperties() {
+        Selenide.clearBrowserCookies();
+    }
 }
