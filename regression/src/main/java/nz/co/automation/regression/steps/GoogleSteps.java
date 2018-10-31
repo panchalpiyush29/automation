@@ -49,6 +49,6 @@ public class GoogleSteps {
 
     @Then("^I should see at least (\\d+) correct result$")
     public void iShouldSeeAtLeastCorrectResult(int resultCount) {
-        assertThat(googleHomePage.hasResults(resultCount));
+        googleHomePage.hasResults(resultCount);
     }
 }

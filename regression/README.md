@@ -3,7 +3,7 @@ How to run tests
 1) Open Cucumber Runner
 2) Set VM options = -Dspring.profiles.active=local -Dselenide.browser=chrome
 
-e.g. `-Dspring.profiles.active=local -Dselenide.browser=firefox
+e.g. `-Dspring.profiles.active=local -Dselenide.browser=firefox`
 3) Set `-Dsaucelabs.enabled=true` in order to activate saucelabs.
 4) Swagger API Documentation: http://localhost:8089/swagger-ui.html
 5) Run cucumber test on mvn
