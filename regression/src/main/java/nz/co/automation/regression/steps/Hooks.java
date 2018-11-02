@@ -33,6 +33,7 @@ public class Hooks {
     private final SaucelabsClient saucelabsClient;
     private final ReportBuilder reportBuilder;
     private final Browser browser;
+    public static final String SCENARIO_TAG_API_TEST = "@api-test";
 
     @Autowired
     public Hooks(Environment environment, SaucelabsDriverManager saucelabsDriverManager, SaucelabsClient saucelabsClient, ReportBuilder reportBuilder, Browser browser) {
@@ -46,16 +47,18 @@ public class Hooks {
     @BeforeAll
     public void beforeAllScenarios() {
         System.out.println("-------------- executing BeforeAll hook ----------------\n");
-        browser.visitBaseUrl();
-        browser.setBrowserProperties();
     }
 
     @Before
-    public void beforeScenario() {
+    public void beforeScenario(Scenario scenario) {
+        boolean isApiTest = scenario.getSourceTagNames().contains(SCENARIO_TAG_API_TEST);
         if (isSaucelabsEnabled()) {
             WebDriverRunner.setWebDriver(saucelabsDriverManager.getSauceLabsDriver());
+        } else if (isApiTest) {
+            return;
         }
-        //WebDriverRunner.setWebDriver(WebDriverRunner.getWebDriver());
+        browser.visitBaseUrl();
+        browser.setBrowserProperties();
     }
 
     @After

@@ -1,4 +1,4 @@
-@api-weather @regression
+@api-weather @regression @api-test
 Feature: Current weather
 
   Scenario: Check current weather of London

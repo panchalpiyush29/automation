@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
             "pretty",
             "json:target/cucumber-json-report.json",
             "junit:target/cucumber-junit.xml"},
-        tags = {"~@wip", "@google"},
+        tags = {"~@wip", "@regression"},
         features = {"src/main/resources/features"}
 )
 public class CucumberRunner {
