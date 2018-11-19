@@ -8,11 +8,9 @@ e.g. `-Dspring.profiles.active=local -Dselenide.browser=firefox`
 4) Swagger API Documentation: http://localhost:8089/swagger-ui.html
 5) Run cucumber test on mvn
 
-`mvn -Dit.test=CucumberRunner -Dcucumber.options="--tags @google" verify`
+`mvn -Dit.test=CucumberRunner -Dcucumber.options="--tags @google" -Dspring.profiles.active=local -Dselenide.browser=chrome verify`
 
-(browser, browser path & profile are defined and pick from POM.xml)
-
-or with saucelab 
+or with saucelab
 
 `mvn -Dit.test=CucumberRunner -Dcucumber.options="--tags @google" -Dsaucelabs.enabled=true verify`
 

@@ -14,11 +14,17 @@ import static com.codeborne.selenide.Selenide.$$;
 public class GoogleHomePage {
     public static final String CSS_SELECTOR_SEARCH = "#lst-ib";
     public static final String CLASS_LINK = "LC20lb";
+    private static final String CLASS_SECURITY_POP_UP = "gb_wa";
+    private static final String NAME_SEARCH_TEXT_BOX = "q";
 
 
     public void search(Query query) {
-        final SelenideElement searchBox = $(CSS_SELECTOR_SEARCH);
-        searchBox.sendKeys(query.getQuery());
+        final SelenideElement popUp = $(By.className(CLASS_SECURITY_POP_UP));
+        if (popUp.isDisplayed()) {
+            popUp.click();
+        }
+        final SelenideElement searchBox = $(By.name(NAME_SEARCH_TEXT_BOX));
+        searchBox.setValue(query.getQuery());
         searchBox.pressEnter();
     }
 
