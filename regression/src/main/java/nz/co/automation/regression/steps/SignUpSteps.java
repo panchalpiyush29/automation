@@ -1,12 +1,15 @@
 package nz.co.automation.regression.steps;
 
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import nz.co.automation.regression.domain.SignUpDetails;
 import nz.co.automation.regression.domain.SignUpDetailsHolder;
 import nz.co.automation.regression.io.ModelFactory;
 import nz.co.automation.regression.pages.SignUpPage;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SignUpSteps {
 
@@ -32,5 +35,10 @@ public class SignUpSteps {
     public void iFillTheGoogleSignUpForm() {
         SignUpDetails signUpDetails = signUpDetailsHolder.get();
         signUpPage.fillForm(signUpDetails);
+    }
+
+    @Then("^I can see a success message$")
+    public void iCanSeeASuccessMessage() {
+        assertThat(signUpPage.successPageIsDisplayed()).isTrue();
     }
 }

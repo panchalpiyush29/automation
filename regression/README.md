@@ -1,6 +1,6 @@
 # Automation
 How to run tests
-1) Open Cucumber Runner
+1) Select Cucumber Runner (under Edit configuration)
 2) Set VM options = -Dspring.profiles.active=local -Dselenide.browser=chrome
 
 e.g. `-Dspring.profiles.active=local -Dselenide.browser=firefox`

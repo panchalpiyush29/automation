@@ -3,7 +3,6 @@ package nz.co.automation.regression.pages;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -29,6 +28,6 @@ public class Browser {
     public void setBrowserProperties() {
         WebDriverRunner.getWebDriver().manage().deleteAllCookies();
         WebDriverRunner.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        WebDriverRunner.getWebDriver().manage().window().setSize(d);
+//        WebDriverRunner.getWebDriver().manage().window().setSize(d);
     }
 }

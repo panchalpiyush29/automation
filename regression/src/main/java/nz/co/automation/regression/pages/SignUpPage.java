@@ -19,6 +19,7 @@ public class SignUpPage {
     private static final String NAME_PASSWORD = "Passwd";
     private static final String NAME_CONFIRM_PASSWORD = "ConfirmPasswd";
     private static final String ID_NEXT_BUTTON = "accountDetailsNext";
+    private static final String ID_SUCCCESS_MSG = "successMsg";
     private final String googleSignUpUrl;
 
     @Autowired
@@ -40,5 +41,10 @@ public class SignUpPage {
         $(By.name(NAME_PASSWORD)).waitUntil(Condition.visible, 2).sendKeys(signUpDetails.getPassword());
         $(By.name(NAME_CONFIRM_PASSWORD)).waitUntil(Condition.visible, 2).sendKeys(signUpDetails.getConfirmPassword());
         $(By.id(ID_NEXT_BUTTON)).click();
+    }
+
+    //Note: This step is meant to fail to view the report
+    public boolean successPageIsDisplayed() {
+        return $(By.id(ID_SUCCCESS_MSG)).isDisplayed();
     }
 }
