@@ -5,19 +5,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Login {
 
-    private String email;
+    private String username;
     private String password;
 
     @JsonCreator
     public Login(
-            @JsonProperty("email") String email,
+            @JsonProperty("username") String username,
             @JsonProperty("password") String password) {
-        this.email = email;
+        this.username = username;
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -31,14 +31,14 @@ public class Login {
 
         Login login = (Login) o;
 
-        if (!getEmail().equals(login.getEmail())) return false;
+        if (!getUsername().equals(login.getUsername())) return false;
         return getPassword().equals(login.getPassword());
 
     }
 
     @Override
     public int hashCode() {
-        int result = getEmail().hashCode();
+        int result = getUsername().hashCode();
         result = 31 * result + getPassword().hashCode();
         return result;
     }
@@ -46,7 +46,7 @@ public class Login {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Login{");
-        sb.append("email='").append(email).append('\'');
+        sb.append("username='").append(username).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append('}');
         return sb.toString();

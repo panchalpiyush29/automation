@@ -17,7 +17,7 @@ public class BasicIT extends DriverBase {
 
         WebDriver driver = DriverBase.getDriver();
 
-        driver.get("http://www.google.com");
+        driver.get("http://www.uiTests.com");
 
         WebElement searchField = driver.findElement(By.name("q"));
 
