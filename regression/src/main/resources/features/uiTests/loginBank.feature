@@ -5,3 +5,4 @@ Feature: Test Demo Saint Petersburg bank
     Given User is on SPB Demo login page
     When User enters "valid" credentials
     Then User greeting "<Hello World>" is displayed
+

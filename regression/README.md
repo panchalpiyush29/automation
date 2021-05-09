@@ -14,7 +14,7 @@ or with saucelab
 
 `mvn -Dit.test=CucumberRunner -Dcucumber.options="--tags @google" -Dsaucelabs.enabled=true verify`
 
-# Mobile
+Mobile
 1) mobile (for android) and mobileIOS (for iOS) are two different modules for mobile automation
 2) android .apk file is embedded in the mobile project (under resources), To run the test create a android phone simulator 
    via Android Studio copy down the name of the simulator and replace the same in AppiumConfigurator (field = deviceName)
