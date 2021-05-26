@@ -1,3 +1,5 @@
+package CommonPrograms;
+
 public class SecondClass {
 
     public String method2(){

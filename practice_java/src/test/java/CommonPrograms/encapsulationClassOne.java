@@ -1,3 +1,5 @@
+package CommonPrograms;
+
 public class encapsulationClassOne {
 
     private int age;

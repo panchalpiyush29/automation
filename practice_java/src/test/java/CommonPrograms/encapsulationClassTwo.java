@@ -1,3 +1,5 @@
+package CommonPrograms;
+
 public class encapsulationClassTwo {
     public static void main(String[] args) {
 

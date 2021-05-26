@@ -1,3 +1,5 @@
+package CommonPrograms;
+
 public class ReverseString {
     public static void main(String[] args) {
 

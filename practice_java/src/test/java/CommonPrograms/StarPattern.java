@@ -1,3 +1,5 @@
+package CommonPrograms;
+
 public class StarPattern {
     public static void main(String[] args) {
         int x, y, row = 5;

@@ -1,3 +1,5 @@
+package CommonPrograms;
+
 public class Palindrome {
 
     public static void main(String[] args) {
@@ -11,7 +13,7 @@ public class Palindrome {
         System.out.println(j);
 
         if(i.equals(j)){
-            System.out.println("Yup it's a Palindrome");
+            System.out.println("Yup it's a CommonPrograms.Palindrome");
         }else {
             System.out.println("Naah!!");
         }

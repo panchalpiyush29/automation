@@ -1,3 +1,5 @@
+package CommonPrograms;
+
 public class FirstClass {
 
     public void method1() {
