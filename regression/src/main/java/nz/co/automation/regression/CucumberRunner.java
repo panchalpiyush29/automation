@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        tags = {"~@wip", "@google"},
+        tags = {"~@wip", "@regression"},
         features = {"src/main/resources/features"}
 )
 public class CucumberRunner {
