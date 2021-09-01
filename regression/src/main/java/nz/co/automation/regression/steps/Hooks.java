@@ -4,6 +4,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.cucumber.spring.CucumberContextConfiguration;
 import net.masterthought.cucumber.ReportBuilder;
 import nz.co.automation.regression.AutomationConfiguration;
 import nz.co.automation.regression.annotations.AfterAll;
@@ -25,7 +26,8 @@ import static org.openqa.selenium.OutputType.BYTES;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AutomationConfiguration.class)
-@SpringBootTest
+@CucumberContextConfiguration
+@SpringBootTest()
 public class Hooks {
 
     private final Environment environment;
@@ -71,7 +73,8 @@ public class Hooks {
             if (scenario.isFailed()) {
                 final TakesScreenshot takesScreenshot = (TakesScreenshot) WebDriverRunner.getWebDriver();
                 final byte[] screenshot = takesScreenshot.getScreenshotAs(BYTES);
-                scenario.embed(screenshot, "image/png");
+                scenario.attach(screenshot, "image/png", scenario.getName());
+
             }
         } finally {
             if (isSaucelabsEnabled()) {
