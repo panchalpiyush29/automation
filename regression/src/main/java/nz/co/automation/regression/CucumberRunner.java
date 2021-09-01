@@ -1,13 +1,13 @@
 package nz.co.automation.regression;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        tags = {"~@wip", "@regression"},
-        features = {"src/main/resources/features"}
+        features = {"src/main/resources/features"},
+        tags = {"~@wip", "@regression"}
 )
 public class CucumberRunner {
 }

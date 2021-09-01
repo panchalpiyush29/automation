@@ -13,7 +13,7 @@ public class CucumberGlueScopeConfiguration {
     @Bean
     public CustomScopeConfigurer glueScopeConfigurer() {
         CustomScopeConfigurer configurer = new CustomScopeConfigurer();
-        configurer.addScope("cucumber-glue", new GlueCodeScope());
+       // configurer.addScope("cucumber-glue", new GlueCodeScope());
         return configurer;
     }
 }
