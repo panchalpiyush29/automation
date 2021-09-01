@@ -18,7 +18,7 @@
     <properties>
         <java.version>1.8</java.version>
         <aspectj.version>1.9.6</aspectj.version>
-        <cucumber.version>4.8.1</cucumber.version>
+        <cucumber.version>5.7.0</cucumber.version>
         <powermock.version>1.6.6</powermock.version>
     </properties>
 
@@ -78,6 +78,11 @@
             <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
         </dependency>
 
         <!-- Selenide -->

@@ -1,7 +1,7 @@
 package nz.co.automation.regression.saucelabs;
 
 import com.codeborne.selenide.WebDriverRunner;
-import cucumber.api.Scenario;
+import io.cucumber.java.Scenario;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
 import org.springframework.beans.factory.annotation.Autowired;

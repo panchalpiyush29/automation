@@ -1,9 +1,9 @@
 package nz.co.automation.regression.steps;
 
 import com.codeborne.selenide.WebDriverRunner;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import net.masterthought.cucumber.ReportBuilder;
 import nz.co.automation.regression.AutomationConfiguration;
 import nz.co.automation.regression.annotations.AfterAll;

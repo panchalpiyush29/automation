@@ -1,8 +1,8 @@
 package nz.co.automation.regression.steps;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import nz.co.automation.regression.domain.Query;
 import nz.co.automation.regression.domain.QueryHolder;
 import nz.co.automation.regression.io.ModelFactory;
@@ -11,7 +11,6 @@ import nz.co.automation.regression.pages.GoogleHomePage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.codeborne.selenide.Selenide.title;
-import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class GoogleSteps {

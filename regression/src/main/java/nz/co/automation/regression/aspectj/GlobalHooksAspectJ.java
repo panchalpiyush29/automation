@@ -19,7 +19,7 @@ public class GlobalHooksAspectJ {
 
   private boolean globalHooksSet = false;
 
-  @Before("@annotation(cucumber.api.java.Before)")
+  @Before("@annotation(io.cucumber.java.Before)")
   public void before(JoinPoint joinPoint) throws Throwable {
     if (!globalHooksSet) {
       final Method afterAllMethod = getMethodWithAnnotation(joinPoint, AfterAll.class);
