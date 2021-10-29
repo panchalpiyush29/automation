@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         publish = true,
-        plugin = {"pretty"},
+        plugin = {"pretty", "json:target/cucumber-json-report.json"},
         tags = "(@regression)",
         features = {"src/main/resources/features"}
 
