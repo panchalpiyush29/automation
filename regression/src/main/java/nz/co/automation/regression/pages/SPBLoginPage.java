@@ -13,7 +13,7 @@ public class SPBLoginPage {
 
 
     public void enterCredentials(Login login) {
-        $(By.name("username")).waitUntil(Condition.visible, 20).val(login.getUsername());
+        $(By.name("username")).shouldHave(Condition.visible).val(login.getUsername());
         $(By.name("password")).val(login.getPassword()).pressEnter();
         enter2ndFactor();
     }
@@ -28,6 +28,6 @@ public class SPBLoginPage {
     }
 
     public String userGreeting() {
-        return $("#user-greeting").waitUntil(Condition.visible, 20).getText();
+        return $("#user-greeting").shouldHave(Condition.visible).getText();
     }
 }

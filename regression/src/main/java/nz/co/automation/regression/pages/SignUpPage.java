@@ -35,11 +35,11 @@ public class SignUpPage {
     }
 
     private void fill(SignUpDetails signUpDetails) {
-        $(By.id(ID_FIRST_NAME)).waitUntil(Condition.visible, 5).sendKeys(signUpDetails.getFirstName());
-        $(By.id(ID_LAST_NAME)).waitUntil(Condition.visible, 2).sendKeys(signUpDetails.getLastName());
-        $(By.id(ID_USERNAME)).waitUntil(Condition.visible, 2).sendKeys(signUpDetails.getUserName());
-        $(By.name(NAME_PASSWORD)).waitUntil(Condition.visible, 2).sendKeys(signUpDetails.getPassword());
-        $(By.name(NAME_CONFIRM_PASSWORD)).waitUntil(Condition.visible, 2).sendKeys(signUpDetails.getConfirmPassword());
+        $(By.id(ID_FIRST_NAME)).shouldHave(Condition.visible).sendKeys(signUpDetails.getFirstName());
+        $(By.id(ID_LAST_NAME)).shouldHave(Condition.visible).sendKeys(signUpDetails.getLastName());
+        $(By.id(ID_USERNAME)).shouldHave(Condition.visible).sendKeys(signUpDetails.getUserName());
+        $(By.name(NAME_PASSWORD)).shouldHave(Condition.visible).sendKeys(signUpDetails.getPassword());
+        $(By.name(NAME_CONFIRM_PASSWORD)).shouldHave(Condition.visible).sendKeys(signUpDetails.getConfirmPassword());
         $(By.id(ID_NEXT_BUTTON)).click();
     }
 

@@ -21,7 +21,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static com.codeborne.selenide.Selenide.close;
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static org.openqa.selenium.OutputType.BYTES;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -78,7 +78,7 @@ public class Hooks {
             }
         } finally {
             if (isSaucelabsEnabled()) {
-                close();
+                closeWebDriver();
             }
         }
     }
